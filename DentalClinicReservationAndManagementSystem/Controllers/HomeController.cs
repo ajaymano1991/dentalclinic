@@ -10,6 +10,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
+        DentalClinicEntities db = new DentalClinicEntities();
         public ActionResult Index()
         {
             var mvcName = typeof(Controller).Assembly.GetName();
@@ -18,12 +19,12 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
             ViewData["Runtime"] = isMono ? "Mono" : ".NET";
 
-            DentistModel dm = new DentistModel();
-            List<Dentist> dentistList1 = dm.Dentists.ToList();
+            
+            List<Dentist> dentistList1 = db.Dentists.ToList();
             List<Dentist> dentistList = new List<Dentist>();
             foreach (var dentist in dentistList1)
             {
-                if (dentist.isAvailable == 1)
+                if (dentist.isAvailable == true)
                 {
                     dentistList.Add(dentist);
                 }
@@ -38,7 +39,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         }
         public ActionResult Services()
         {
-            return View();  
+            return View();
         }
         public ActionResult Dentists()
         {
@@ -53,22 +54,22 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DentistLogin(DentistLogin dentist)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
                 using (DentistLoginModel dm = new DentistLoginModel())
                 {
                     var v = dm.Dentists.Where(a => a.username.Equals(dentist.username) && a.password.Equals(dentist.password)).FirstOrDefault();
-                    if ( v != null )
+                    if (v != null)
                     {
                         Session["LoggedDentistID"] = v.Id.ToString();
                         Session["LoggedDentistUsername"] = v.username.ToString();
                         Session["LoggedDentistFullName"] = v.name.ToString();
-                       return RedirectToAction("DentistPanel");
-                    } 
+                        return RedirectToAction("DentistPanel");
+                    }
                     else
                     {
                         dentist.LoginErrorMessage = "Wrong username or password.";
-                        return View("DentistLogin",dentist);
+                        return View("DentistLogin", dentist);
                     }
                 }
             }
@@ -76,9 +77,9 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         }
         public ActionResult AfterDentistLogin()
         {
-            
+
             return View();
-       
+
         }
         public ActionResult DentistPanel()
         {
@@ -152,58 +153,61 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
             return View();
         }
-        
+
         public ActionResult PatientRegister()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult PatientRegister(Patient patientr)
+        public ActionResult PatientRegister(Patient patient)
         {
             ViewBag.Message1 = "";
             ViewBag.Message2 = "";
             if (ModelState.IsValid)
             {
-                using (PatientRegisterModel prm = new PatientRegisterModel())
+                var ExistingPatient = db.PatientRegisters.Where(a => a.Username == patient.username).FirstOrDefault();
+                if (ExistingPatient != null)
                 {
-                    var v1 = prm.Patients.Where(a => a.username.Equals(patientr.username)).FirstOrDefault();
-                    if (v1 != null)
+                    ViewBag.Message2 = "Username already exists";
+                    return View("PatientRegister", patient);
+                }
+                var PatientEmail = db.PatientRegisters.Where(a => a.Email == patient.email).FirstOrDefault();
+                if (PatientEmail != null)
+                {
+                    ViewBag.Message1 = "Email already exists";
+                    return View("PatientRegister", patient);
+                }
+                else
+                {
+                    var newPatientRegister = new PatientRegister
                     {
-                        ViewBag.Message2 = "Username already exists";
-                        return View("PatientRegister", patientr);
-                    }
-                    var v2 = prm.Patients.Where(a => a.email.Equals(patientr.email)).FirstOrDefault();
-                    if ( v2 != null )
-                    {
-                        ViewBag.Message1 = "Email already exists";
-                        return View("PatientRegister", patientr);
-                    }
-                    else
-                    {
-                        prm.Patients.Add(patientr);
-                        prm.SaveChanges();
-                        return RedirectToAction("PatientPanel");
-                    }
-                    
-                        
-                    
-                    
+                        PatientName = patient.name,
+                        Username = patient.username,
+                        Password = patient.password,
+                        Email = patient.email,
+                        Address = patient.address,
+                        DOB = patient.dateofbirth,
+                        Contact = patient.contact,
+                        BloodGroup = patient.bloodgroup
+                    };
+                    db.PatientRegisters.Add(newPatientRegister);
+                    db.SaveChanges();
+                    return RedirectToAction("PatientPanel");
                 }
             }
             return RedirectToAction("PatientLogin");
-            
         }
-        
+
         public ActionResult SelectDentist()
         {
             if (Session["LoggedPatientUsername"] == null) return RedirectToAction("PatientLogin");
             DentistModel dm = new DentistModel();
-            List<Dentist> dentistList1 = dm.Dentists.ToList();
+            List<Dentist> dentistList1 = db.Dentists.ToList();
             List<Dentist> dentistList = new List<Dentist>();
             foreach (var dentist in dentistList1)
             {
-                if (dentist.isAvailable == 1)
+                if (dentist.isAvailable == true)
                 {
                     dentistList.Add(dentist);
                 }
@@ -227,13 +231,13 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         public ActionResult MyAppointments()
         {
             AppointmentModel dm = new AppointmentModel();
-            List<Appointment> appointmentList1 = dm.Appointments.ToList();
+            List<Appointment> appointmentList1 = db.Appointments.ToList();
             List<Appointment> appointmentList = new List<Appointment>();
             string s = Session["LoggedPatientID"].ToString();
             int n = Convert.ToInt32(s);
             foreach (var appointment in appointmentList1)
             {
-                if (appointment.patient_id == n)
+                if (appointment.PatientId == n)
                 {
                     appointmentList.Add(appointment);
                 }
@@ -248,13 +252,13 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         {
 
             AppointmentModel dm = new AppointmentModel();
-            List<Appointment> appointmentList1 = dm.Appointments.ToList();
+            List<Appointment> appointmentList1 = db.Appointments.ToList();
             List<Appointment> appointmentList = new List<Appointment>();
             string s = Session["LoggedDentistID"].ToString();
             int n = Convert.ToInt32(s);
             foreach (var appointment in appointmentList1)
             {
-                if (appointment.dentist_id == n)
+                if (appointment.DatientId == n)
                 {
                     appointmentList.Add(appointment);
                 }
@@ -277,7 +281,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                 using (PrescriptionModel prm = new PrescriptionModel())
                 {
 
-                   
+
                     prm.Prescriptions.Add(prescription);
                     prm.SaveChanges();
                     return RedirectToAction("DentistPanel");
@@ -290,59 +294,58 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
         public ActionResult TakeAppointment()
         {
-             DentistModel dm = new DentistModel();
-            List<Dentist> appointmentList2 = dm.Dentists.ToList();
+            List<Dentist> appointmentList2 = db.Dentists.ToList();
             ViewBag.appointmentList2 = appointmentList2;
             return View();
         }
         [HttpPost]
-        public ActionResult TakeAppointment(Appointment appointment)
+        public ActionResult TakeAppointment(DentalClinicReservationAndManagementSystem.Models.Appointment appointment)
         {
-           
             ViewBag.Message2 = "";
             if (ModelState.IsValid)
             {
-                using (AppointmentModel prm = new AppointmentModel())
+                var v = db.Appointments
+                          .Where(a => a.DatientId == appointment.dentist_id && a.Datetime == DateTime.Parse(appointment.datetime))
+                          .FirstOrDefault();
+                if (v != null)
                 {
-
-                    /*var v = prm.Appointments.Where(a => a.dentist_id.Equals(appointment.dentist_id) && a.datetime.Equals(appointment.datetime)).FirstOrDefault();
-                    if (v != null)
+                    ViewBag.Message2 = "Time slot is not available";
+                    return View("TakeAppointment", appointment);
+                }
+                else
+                {
+                    var newAppointment = new DentalClinicReservationAndManagementSystem.Appointment
                     {
-                        ViewBag.Message2 = "Time slot is not avaible";
-                        return View("TakeAppointment", appointment);
-                    }*/
-                    //else
-                    //{
-                        prm.Appointments.Add(appointment);
-                        prm.SaveChanges();
-                        return RedirectToAction("PatientPanel");
-                    //}
-   
+                        PatientId = appointment.patient_id,
+                        DatientId = appointment.dentist_id,
+                        Datetime = DateTime.Parse(appointment.datetime)
+                    };
+                    db.Appointments.Add(newAppointment);
+                    db.SaveChanges();
+                    return RedirectToAction("PatientPanel");
                 }
             }
-
             return View();
         }
-        //public ActionResult SeeAppointments()
-      //  {
-          //  return View();
-        //}
-        //[HttpPost]
-        /*public ActionResult SeeAppointments(Appointment appointment)
+        public ActionResult SeeAppointments()
         {
-            AppointmentModel am = new AppointmentModel();
-            List<Appointment> aList = am.Appointments.ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SeeAppointments(Appointment appointment)
+        {
+            List<Appointment> aList = db.Appointments.ToList();
             List<Appointment> fList = new List<Appointment>();
             foreach ( Appointment ap in aList )
             {
-                if ( appointment.dentist_id == ap.dentist_id )
+                if ( appointment.DatientId == ap.DatientId )
                 {
                     fList.Add(ap);
                 }
             }
             ViewBag.fList = fList;
             return View();
-        }*/
+        }
 
     }
 }
