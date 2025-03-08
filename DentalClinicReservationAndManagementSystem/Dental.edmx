@@ -9,10 +9,13 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PatientId" Type="int" Nullable="false" />
-          <Property Name="DatientId" Type="int" Nullable="false" />
-          <Property Name="Datetime" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ReasonForAppointment" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PreferredDateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="Dentist">
           <Key>
@@ -54,19 +57,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="DentalClinicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DentalClinicEntities" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="Appointments" EntityType="DentalClinicModel.Appointment" />
           <EntitySet Name="PatientRegisters" EntityType="DentalClinicModel.PatientRegister" />
           <EntitySet Name="Dentists" EntityType="DentalClinicModel.Dentist" />
+          <EntitySet Name="Appointments" EntityType="DentalClinicModel.Appointment" />
         </EntityContainer>
-        <EntityType Name="Appointment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PatientId" Type="Int32" Nullable="false" />
-          <Property Name="DatientId" Type="Int32" Nullable="false" />
-          <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="PatientRegister">
           <Key>
             <PropertyRef Name="Id" />
@@ -97,22 +91,24 @@
           <Property Name="isVerfied" Type="Boolean" Nullable="false" />
           <Property Name="isAvailable" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ReasonForAppointment" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PreferredDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DentalClinicModelStoreContainer" CdmEntityContainer="DentalClinicEntities" >
-          <EntitySetMapping Name="Appointments">
-            <EntityTypeMapping TypeName="DentalClinicModel.Appointment">
-              <MappingFragment StoreEntitySet="Appointment">
-                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
-                <ScalarProperty Name="DatientId" ColumnName="DatientId" />
-                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PatientRegisters">
             <EntityTypeMapping TypeName="DentalClinicModel.PatientRegister">
               <MappingFragment StoreEntitySet="PatientRegister">
@@ -141,6 +137,19 @@
                 <ScalarProperty Name="institute" ColumnName="institute" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="DentalClinicModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="PreferredDateTime" ColumnName="PreferredDateTime" />
+                <ScalarProperty Name="ReasonForAppointment" ColumnName="ReasonForAppointment" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

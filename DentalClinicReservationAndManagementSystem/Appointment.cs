@@ -14,9 +14,12 @@ namespace DentalClinicReservationAndManagementSystem
     
     public partial class Appointment
     {
-        public long Id { get; set; }
-        public int PatientId { get; set; }
-        public int DatientId { get; set; }
-        public System.DateTime Datetime { get; set; }
+        public int Id { get; set; }
+        public string PatientName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string ReasonForAppointment { get; set; }
+        public System.DateTime PreferredDateTime { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
     }
 }

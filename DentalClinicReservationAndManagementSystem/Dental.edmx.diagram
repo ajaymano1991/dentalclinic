@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="84a15d67f72b4d068cd9ccaa5561d367" Name="Diagram1" >
-        <EntityTypeShape EntityType="DentalClinicModel.Appointment" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DentalClinicModel.PatientRegister" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="DentalClinicModel.Dentist" Width="1.5" PointX="4.625" PointY="0.75" />
+        <EntityTypeShape EntityType="DentalClinicModel.Appointment" Width="1.5" PointX="1" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

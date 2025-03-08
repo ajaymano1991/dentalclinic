@@ -61,71 +61,96 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-         
-                       
+
+
                 <div class="form-horizontal">
                     <h5 class="card-title text-center">New Appointment</h5>
                     @using (Html.BeginForm("TakeAppointment", "Home", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
-                    <form class="form-signin">
-                        <div class="form-label-group">
-                            <label>Dentist ID</label><br />
-                            @Html.EditorFor(model => model.dentist_id, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.dentist_id, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-label-group">
-                            <label>Patient ID</label><br />
-                            @Html.EditorFor(model => model.patient_id, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="form-label-group">
-                            <label>Time</label><br />
-                            @Html.EditorFor(model => model.datetime, new { htmlAttributes = new { @class = "form-control" } })
-                            <br />
-                            <div class="text-danger">@ViewBag.Message2</div>
-                        </div>
-                        <a href="/Home/SeeAppointments" class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i>Check Dentist Appointments</a>
+                        <form class="form-signin">
+                            <div class="form-label-group">
+                                <label>Patient Name</label><br />
+                                @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-label-group">
+                                <label>Patient Email</label><br />
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-label-group">
+                                <label>Patient PhoneNumber</label><br />
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-label-group">
+                                <label>Reason for Appointment</label><br />
+                                @Html.DropDownListFor(model => model.ReasonForAppointment, new SelectList(new[]
+                                {
+                                    "ROUTINE DENTAL CHECKUP",
+                                    "ROOT CANAL THERAPY",
+                                    "DENTAL EXTRACTION AND IMPACTION",
+                                    "CROWNS AND BRIDGE",
+                                    "DENTURES",
+                                    "DENTAL IMPLANTS",
+                                    "DIGITAL SMILE DESIGNING",
+                                    "FULL MOUTH REHABILITATION",
+                                    "GUM DISEASE TREATMENT",
+                                    "LASER TREATMENT",
+                                    "ORTHODONTIC – BRACES",
+                                    "CLEAR ALIGNERS",
+                                    "PEDIATRIC DENTISTRY",
+                                    "OTHERS"
+                                }), "Select a reason", new { @class = "form-control", required = "required" })
+                            </div>
+                            <div class="form-label-group">
+                                <label for="datetime">Time</label><br />
+                                @Html.TextBoxFor(model => model.PreferredDateTime, new { @class = "form-control", @type = "datetime-local" })
+                                <div class="text-danger">@ViewBag.Message2</div>
+                            </div>
+                            <a href="/Home/SeeAppointments" class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i>Check Dentist Appointments</a>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Create">Take Appointment</button>
-                        <hr class="my-4">
-                    </form>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Create">Take Appointment</button>
+                            <hr class="my-4">
+                        </form>
                     }
                 </div>
-                           </div>
+            </div>
 
-                            <div class="col-md-3">
-                                Your ID is @Session["LoggedPatientID"]
-                                <div class="container-fluid">
+            <div class="col-md-3">
+                Your ID is @Session["LoggedPatientID"]
+                <div class="container-fluid">
 
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Dentist ID</th>
-                                                <th>Dentist Name</th>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Dentist ID</th>
+                                <th>Dentist Name</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (DentalClinicReservationAndManagementSystem.Dentist dentist in ViewBag.appointmentList2)
-                                            {
-                                                <tr>
-                                                    <td>@dentist.Id</td>
-                                                    <td>@dentist.Name</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (DentalClinicReservationAndManagementSystem.Dentist dentist in ViewBag.appointmentList2)
+                            {
+                                <tr>
+                                    <td>@dentist.Id</td>
+                                    <td>@dentist.Name</td>
 
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        
-                       
-                        
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                    </div>
-                
-                    </div>
-    
+
+
+
+        </div>
+
+    </div>
+
 </body>
 
 @section Scripts {

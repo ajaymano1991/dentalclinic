@@ -254,6 +254,7 @@
     <Content Include="Content\images\iPad2.png" />
     <Content Include="Content\images\iphonex.png" />
     <Content Include="Content\images\loc.png" />
+    <Content Include="Content\images\logo3.png" />
     <Content Include="Content\images\Macbook.png" />
     <Content Include="Content\images\mask.png" />
     <Content Include="Content\images\new_logo.png" />
@@ -273,6 +274,8 @@
     <Content Include="Content\images\sidebar-4.jpg" />
     <Content Include="Content\images\table.png" />
     <Content Include="Content\images\vue.png" />
+    <Content Include="Content\images\logo2.jpeg" />
+    <Content Include="Content\images\logo5.jpeg" />
     <Content Include="Content\js\aos.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -312,6 +315,7 @@
     <Content Include="Content\js\plugins\sweetalert2.js" />
     <Content Include="Content\js\popper.min.js" />
     <Content Include="Content\js\scrollax.min.js" />
+    <Content Include="Content\images\logo1.jpeg" />
     <Content Include="Dental.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Dental.edmx</DependentUpon>

@@ -18,19 +18,70 @@
     <link rel="stylesheet" href="@Url.Content("../../Content/css/flaticon.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/icomoon.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/style.css")">
+    <style>
+        @@keyframes scroll-left {
+            0% {
+                transform: translateX(100%);
+                animation-timing-function: ease-in; /* Fast start */
+            }
 
+            5% {
+                transform: translateX(0%); /* Reach normal position in 2s */
+                animation-timing-function: linear;
+            }
+
+            100% {
+                transform: translateX(-100%);
+                animation-timing-function: linear; /* Slow continuous scroll */
+            }
+        }
+
+        .scrolling-wrapper {
+            overflow: hidden;
+            background-color: #004aad;
+            color: white;
+            padding: 10px 0;
+            white-space: nowrap;
+            font-weight: bold;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .scrolling-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 32s ease-in-out infinite; /* 2s fast + 30s slow */
+        }
+
+
+
+
+    </style>
 
 
 
 </head>
 <body>
+    <div class="scrolling-wrapper">
+        <div class="scrolling-content">
+            📢 Book your appointment today! | Get a free consultation for new patients! | Call us at +123 456 7890
+        </div>
+    </div>
+
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="/Home/Index">Krishna Dental <span>Care</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
+            <div class="text-left mt-2 logo">
+                <a href="#home">
+                    <img src="~/Content/images/logo3.png" alt="Logo" class="img-fluid" style="max-height: 200px;">
+                </a>
+            </div>
+            <div class="text-left logo2" style="height: 80px;position:relative;top:-40px">
+                <a href="#home">
+                    <img src="~/Content/images/logo5.jpeg" alt="Logo" class="img-fluid" style="height: 130px;width:150px;">
+                </a>
+            </div>
+            
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
@@ -54,7 +105,7 @@
                 <div class="row slider-text align-items-center" data-scrollax-parent="true">
                     <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                         @*<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Dentistry in a Calm and Relaxed Environment</h1>
-                        <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
+                            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
 
                     </div>
                 </div>
@@ -67,7 +118,7 @@
                 <div class="row slider-text align-items-center" data-scrollax-parent="true">
                     <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                         @*<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Achieve Your Desired Perfect Smile</h1>
-                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
+                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
 
                     </div>
                 </div>
@@ -79,7 +130,7 @@
                 <div class="row slider-text align-items-center" data-scrollax-parent="true">
                     <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                         @*<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Achieve Your Desired Perfect Smile</h1>
-                        <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
+                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
 
                     </div>
                 </div>

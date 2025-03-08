@@ -25,8 +25,8 @@ namespace DentalClinicReservationAndManagementSystem
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<PatientRegister> PatientRegisters { get; set; }
         public virtual DbSet<Dentist> Dentists { get; set; }
+        public virtual DbSet<Appointment> Appointments { get; set; }
     }
 }
