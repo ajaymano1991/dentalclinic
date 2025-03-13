@@ -176,10 +176,14 @@
     <Compile Include="Models\PrescriptionModel.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\subscription.cs" />
     <Compile Include="PatientRegister.cs">
       <DependentUpon>Dental.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="subscription.cs">
+      <DependentUpon>Dental.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DentalCareDB.mdf" />

@@ -62,83 +62,75 @@
 
 </head>
 <body>
-    <div class="scrolling-wrapper">
-        <div class="scrolling-content">
-            📢 Book your appointment today! | Get a free consultation for new patients! | Call us at +123 456 7890
+    <div class="">
+        <div class="container">
+            <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+                <div class="col-md-4 order-md-2 mb-0 mb-md-0 align-items-center text-center">
+                    <a href="#home"><img src="~/Content/images/logo3.png" alt="Logo" class="img-fluid" style="max-height: 150px;"></a>
+                </div>
+                <div class="col-md-4 order-md-1 d-flex topper mb-md-0 mb-0 align-items-center text-md-right">
+                    <div class="icon d-flex justify-content-center align-items-center order-md-last">
+                        <span class="icon-map"></span>
+                    </div>
+                    <div class="pr-md-4 pl-md-0 pl-3 text">
+                        <p class="con"><span>Call Us</span> <span>+91-9790144066</span></p>
+                        <p class="con">130, Kamaraj Salai, Puducherry 605013</p>
+                    </div>
+                </div>
+                <div class="col-md-4 order-md-3 d-flex topper mb-md-0 align-items-center">
+                    <div class="icon d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+                    <div class="text pl-3 pl-md-3">
+                        <p class="hr"><span>Open Hours</span></p>
+                        <p class="time"><span>Morning:</span> <span>9:30am - 1:30pm </span></p>
+                        <p class="time"><span>Evening:</span> <span>4:30am - 9:30pm </span></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <div class="text-left mt-2 logo">
-                <a href="#home">
-                    <img src="~/Content/images/logo3.png" alt="Logo" class="img-fluid" style="max-height: 200px;">
-                </a>
-            </div>
-            <div class="text-left logo2" style="height: 80px;position:relative;top:-40px">
-                <a href="#home">
-                    <img src="~/Content/images/logo5.jpeg" alt="Logo" class="img-fluid" style="height: 130px;width:150px;">
-                </a>
-            </div>
-            
-
+    <div class="scrolling-wrapper">
+        <div class="scrolling-content">
+            📢 Book your appointment today! | Get a free consultation for new patients! | Call us at +91-9790144066
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container d-flex align-items-center justify-content-between" style="padding: 10px;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item nav-link"> @Html.ActionLink("Home", "Index", "Home", new { Style = "color:White" })</li>
-                    <li class="nav-item nav-link"> @Html.ActionLink("About", "About", "Home", new { Style = "color:White" })</li>
-                    <li class="nav-item nav-link"> @Html.ActionLink("Services", "Services", "Home", new { Style = "color:White" })</li>
-                    <li class="nav-item nav-link"> @Html.ActionLink("Dentists", "Dentists", "Home", new { Style = "color:White" })</li>
-                    <li class="nav-item cta nav-link"> @Html.ActionLink("Make an Appointment", "TakeAppointment", "Home", new { Style = "color:White" })</li>
-                    <li class="nav-item cta nav-link"> @Html.ActionLink("Dentist Arena", "DentistLogin", "Home", new { Style = "color:White" })</li>
-                    <li class="nav-item cta nav-link"> @Html.ActionLink("Patient Arena", "PatientLogin", "Home", new { Style = "color:White" })</li>
+                <ul class="navbar-nav d-flex flex-row" style="font-size:14px; gap: 8px; list-style: none; padding: 0; margin: 0;">
+                    <li class="nav-item nav-link active">
+                        @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link p-1" })
+                    </li>
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("About", "About", "Home", new { @class = "nav-link p-1" })
+                    </li>
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Services", "Services", "Home", new { @class = "nav-link p-1" })
+                    </li>
+                    <li class="nav-item nav-link">
+                        <a href="#contactus-section" class="nav-link p-1">CONTACT US</a>
+                    </li>
+                    <li class="nav-item nav-link">
+                        <a href="#Doctors-Section" class="nav-link p-1">OUR DENTIST</a>
+                    </li>
+                    <li class="nav-item nav-link">
+                        <a href="#appointment-section" class="nav-link p-1">MAKE AN APPOINTMENT</a>
+                    </li>
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Dentist Arena", "DentistLogin", "Home", new { @class = "nav-link p-1" })
+                    </li>
+                    <li class="nav-item nav-link">
+                        @Html.ActionLink("Patient Arena", "PatientLogin", "Home", new { @class = "nav-link p-1" })
+                    </li>
                 </ul>
             </div>
         </div>
+
+
     </nav>
     <!-- END nav -->
-
-    <section class="home-slider owl-carousel">
-        <div class="slider-item" style="background-image: url('../../Content/images/bg_2.jpeg');">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text align-items-center" data-scrollax-parent="true">
-                    <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                        @*<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Dentistry in a Calm and Relaxed Environment</h1>
-                            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slider-item" style="background-image: url('../../Content/images/bg_3.jpeg');">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text align-items-center" data-scrollax-parent="true">
-                    <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                        @*<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Achieve Your Desired Perfect Smile</h1>
-                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slider-item" style="background-image: url('../../Content/images/bg_1.jpeg');">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text align-items-center" data-scrollax-parent="true">
-                    <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                        @*<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Achieve Your Desired Perfect Smile</h1>
-                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>*@
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
     <div>@RenderBody()</div>
 
 
@@ -270,6 +262,35 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="../../Content/js/google-map.js"></script>
     <script src="../../Content/js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Smooth scrolling for same-page links
+            $("a[href^='#']").on("click", function (e) {
+                e.preventDefault();
+                var target = $($(this).attr("href"));
+
+                if (target.length) {
+                    $("html, body").animate({
+                        scrollTop: target.offset().top - 50 // Adjust based on navbar height
+                    }, 1200, "easeInOutExpo"); // Smooth easing effect
+                }
+            });
+
+            // Smooth scrolling after page reload if hash exists
+            if (window.location.hash) {
+                var target = $(window.location.hash);
+                if (target.length) {
+                    $("html, body").animate({
+                        scrollTop: target.offset().top - 50
+                    }, 1200, "easeInOutExpo");
+                }
+            }
+        });
+    </script>
+
 
 
 

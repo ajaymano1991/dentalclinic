@@ -47,10 +47,18 @@
           <Property Name="Contact" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="BloodGroup" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="DentalClinicModelStoreContainer">
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dentist" EntityType="Self.Dentist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientRegister" EntityType="Self.PatientRegister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subscription" EntityType="Self.subscription" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -60,6 +68,7 @@
           <EntitySet Name="PatientRegisters" EntityType="DentalClinicModel.PatientRegister" />
           <EntitySet Name="Dentists" EntityType="DentalClinicModel.Dentist" />
           <EntitySet Name="Appointments" EntityType="DentalClinicModel.Appointment" />
+          <EntitySet Name="subscriptions" EntityType="DentalClinicModel.subscription" />
         </EntityContainer>
         <EntityType Name="PatientRegister">
           <Key>
@@ -102,6 +111,13 @@
           <Property Name="ReasonForAppointment" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PreferredDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -150,6 +166,14 @@
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subscriptions">
+            <EntityTypeMapping TypeName="DentalClinicModel.subscription">
+              <MappingFragment StoreEntitySet="subscription">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

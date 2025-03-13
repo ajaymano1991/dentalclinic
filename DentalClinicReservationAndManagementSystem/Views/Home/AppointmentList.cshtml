@@ -111,18 +111,20 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Appointment ID</th>
-                                <th>Patient ID</th>
-                                <th>Time</th>
+                                <th>Patient Name</th>
+                                <th>Phone Number</th>
+                                <th>Reason</th>
+                                <th>Date Time</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var appointment in ViewBag.appointmentList)
                             {
-                                <tr>
-                                    <td>@appointment.Id</td>
-                                    <td>@appointment.PatientId</td>
-                                    <td>@appointment.Datetime</td>
+                                <tr>                                  
+                                    <td>@appointment.PatientName</td>
+                                    <td>@appointment.PhoneNumber</td>
+                                    <td>@appointment.ReasonForAppointment</td>
+                                    <td>@appointment.PreferredDateTime</td>
                                 </tr>
                             }
                         </tbody>

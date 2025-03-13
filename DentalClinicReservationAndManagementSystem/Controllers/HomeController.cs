@@ -310,7 +310,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                 if (appointments.Count>0)
                 {
                     ViewBag.Message2 = "Time slot is not available";
-                    return View("TakeAppointment", appointment);
+                    return View("Index", appointment);
                 }
                 else
                 {
@@ -339,7 +339,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                         }
                         throw;
                     }
-                    return RedirectToAction("PatientPanel");
+                    return RedirectToAction("Index");
                 }
             }
             return View();
@@ -362,6 +362,31 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             }
             ViewBag.fList = fList;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult subscription(string email)
+        {
+            var subscribied = db.subscriptions.AsEnumerable()
+                                     .Where(a => a.Email == email).FirstOrDefault();
+
+
+            if (subscribied != null)
+            {
+                ViewBag.Message2 = "Already subscribied";
+                return View("Index");
+            }
+            else
+            {
+                var newsubscription = new subscription()
+                {
+                    Email = email
+                };
+
+                db.subscriptions.Add(newsubscription);
+                db.SaveChanges();
+                return View("Index");
+            }
         }
 
     }
