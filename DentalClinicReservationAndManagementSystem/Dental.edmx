@@ -17,6 +17,14 @@
           <Property Name="PreferredDateTime" Type="datetime" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" />
         </EntityType>
+        <EntityType Name="DentalNews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Dentist">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,6 +64,7 @@
         </EntityType>
         <EntityContainer Name="DentalClinicModelStoreContainer">
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DentalNews" EntityType="Self.DentalNews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dentist" EntityType="Self.Dentist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientRegister" EntityType="Self.PatientRegister" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subscription" EntityType="Self.subscription" Schema="dbo" store:Type="Tables" />
@@ -69,6 +78,7 @@
           <EntitySet Name="Dentists" EntityType="DentalClinicModel.Dentist" />
           <EntitySet Name="Appointments" EntityType="DentalClinicModel.Appointment" />
           <EntitySet Name="subscriptions" EntityType="DentalClinicModel.subscription" />
+          <EntitySet Name="DentalNews" EntityType="DentalClinicModel.DentalNew" />
         </EntityContainer>
         <EntityType Name="PatientRegister">
           <Key>
@@ -118,6 +128,14 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DentalNew">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -174,6 +192,15 @@
             <EntityTypeMapping TypeName="DentalClinicModel.subscription">
               <MappingFragment StoreEntitySet="subscription">
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DentalNews">
+            <EntityTypeMapping TypeName="DentalClinicModel.DentalNew">
+              <MappingFragment StoreEntitySet="DentalNews">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

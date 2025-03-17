@@ -15,14 +15,16 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         DentalClinicEntities db = new DentalClinicEntities();
         public ActionResult Index()
         {
-            var mvcName = typeof(Controller).Assembly.GetName();
-            var isMono = Type.GetType("Mono.Runtime") != null;
-
-            ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
-            ViewData["Runtime"] = isMono ? "Mono" : ".NET";
-
-
             List<Dentist> dentistList1 = db.Dentists.ToList();
+            List<Appointment> todaysAppointments = db.Appointments.ToList() 
+                                                   .Where(x => x.PreferredDateTime.Date == DateTime.Now.Date)
+                                                   .ToList();
+            var dentalNews = db.DentalNews.ToList()
+                           .Where(n => n.IsActive)
+                           .ToList();
+
+           
+
             List<Dentist> dentistList = new List<Dentist>();
             foreach (var dentist in dentistList1)
             {
@@ -32,7 +34,11 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                 }
 
             }
+
+            // Store data in ViewBag
+            ViewBag.DentalNews = dentalNews;
             ViewBag.dentistList = dentistList;
+            ViewBag.TodaysAppointments = todaysAppointments;
             return View();
         }
         public ActionResult About()
