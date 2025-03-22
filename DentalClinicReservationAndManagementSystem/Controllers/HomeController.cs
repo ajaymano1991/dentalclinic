@@ -23,7 +23,8 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                            .Where(n => n.IsActive)
                            .ToList();
 
-           
+            List<FeedBack> dentalFeedBackList = db.FeedBacks.ToList();
+                          
 
             List<Dentist> dentistList = new List<Dentist>();
             foreach (var dentist in dentistList1)
@@ -38,6 +39,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             // Store data in ViewBag
             ViewBag.DentalNews = dentalNews;
             ViewBag.dentistList = dentistList;
+            ViewBag.feedBack = dentalFeedBackList;
             ViewBag.TodaysAppointments = todaysAppointments;
             return View();
         }
@@ -371,10 +373,10 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult subscription(string email)
+        public ActionResult subscription(string email, string phoneNumber)
         {
             var subscribied = db.subscriptions.AsEnumerable()
-                                     .Where(a => a.Email == email).FirstOrDefault();
+                                     .Where(a => a.Email == email && a.PhoneNumber == phoneNumber).FirstOrDefault();
 
 
             if (subscribied != null)
@@ -386,14 +388,40 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             {
                 var newsubscription = new subscription()
                 {
-                    Email = email
+                    Email = email,
+                    PhoneNumber=phoneNumber
                 };
 
                 db.subscriptions.Add(newsubscription);
                 db.SaveChanges();
-                return View("Index");
+                return RedirectToAction("Index");
             }
         }
+        [HttpPost]
+        public ActionResult SubmitFeedback(string PatientName, string FeedbackText, int Rating)
+        {
+            
+                var newFeedback = new FeedBack()
+                {
+                    PatientName = PatientName,
+                    FeedbackText = FeedbackText,
+                    Rating = Rating,
+                    CreatedAt = DateTime.Now
+                };
+
+                db.FeedBacks.Add(newFeedback);
+                db.SaveChanges();
+
+                ViewBag.Message2 = "Thank you for your feedback!";
+              return RedirectToAction("Index");
+
+        }
+        public ActionResult LoadAppointments()
+        {
+            var appointments = db.Appointments.ToList(); // Fetch from database
+            return PartialView("_AppointmentsList", appointments);
+        }
+
 
     }
 }

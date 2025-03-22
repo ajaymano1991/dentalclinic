@@ -53,6 +53,60 @@
             animation: scroll-left 32s ease-in-out infinite; /* 2s fast + 30s slow */
         }
 
+        .navbar-nav {
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;        
+            gap: 15px; /* Space between menu items */
+        }
+
+            /* Default menu style */
+            .navbar-nav .nav-item {
+                position: relative;
+                transition: color 0.3s ease-in-out;
+            }
+
+                /* Active or hovered menu item */
+                .navbar-nav .nav-item:hover .nav-link,
+                .navbar-nav .nav-item.active .nav-link {
+                    color: #46b7de !important;
+                }
+
+            /* Make other items black when hovering over one */
+            .navbar-nav:hover .nav-item:not(:hover) .nav-link {
+                color: black !important;
+                opacity: 0.5;
+            }
+
+            /* Add a bottom border effect on hover */
+            .navbar-nav .nav-item .nav-link {
+                position: relative;
+                padding: 10px 15px;
+                transition: all 0.3s ease-in-out;
+                font-weight: bolder;
+                font-size: medium;
+            }
+
+                /* Underline effect */
+                .navbar-nav .nav-item .nav-link::after {
+                    content: "";
+                    display: block;
+                    height: 3px;
+                    width: 0;
+                    background-color: #46b7de;
+                    position: absolute;
+                    bottom: -5px;
+                    left: 50%;
+                    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+                }
+
+            /* Expand underline when hovered */
+            .navbar-nav .nav-item:hover .nav-link::after {
+                width: 100%;
+                left: 0;
+            }
 
 
 
@@ -94,44 +148,42 @@
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container d-flex align-items-center justify-content-between" style="padding: 10px;">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav d-flex flex-row" style="font-size:14px; gap: 8px; list-style: none; padding: 0; margin: 0;">
-                    <li class="nav-item nav-link active">
+            <div class="collapse navbar-collapse justify-content-center" id="ftco-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
                         @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link p-1" })
                     </li>
-                    <li class="nav-item nav-link">
-                        @Html.ActionLink("About", "About", "Home", new { @class = "nav-link p-1" })
+                    <li class="nav-item">
+                        <a href="#About-Section" class="nav-link p-1">ABOUT</a>
                     </li>
-                    <li class="nav-item nav-link">
-                        @Html.ActionLink("Services", "Services", "Home", new { @class = "nav-link p-1" })
+                    <li class="nav-item">
+                        <a href="#Service-Section" class="nav-link p-1">SERVICES</a>
                     </li>
-                    <li class="nav-item nav-link">
+                    <li class="nav-item">
                         <a href="#contactus-section" class="nav-link p-1">CONTACT US</a>
                     </li>
-                    <li class="nav-item nav-link">
+                    <li class="nav-item">
                         <a href="#Doctors-Section" class="nav-link p-1">OUR DENTIST</a>
                     </li>
-                    <li class="nav-item nav-link">
+                    <li class="nav-item">
                         <a href="#appointment-section" class="nav-link p-1">MAKE AN APPOINTMENT</a>
                     </li>
-                    <li class="nav-item nav-link">
+                    <li class="nav-item">
                         @Html.ActionLink("Dentist Arena", "DentistLogin", "Home", new { @class = "nav-link p-1" })
-                    </li>
-                    <li class="nav-item nav-link">
-                        @Html.ActionLink("Patient Arena", "PatientLogin", "Home", new { @class = "nav-link p-1" })
                     </li>
                 </ul>
             </div>
         </div>
-
-
     </nav>
     <!-- END nav -->
-    <div>@RenderBody()</div>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
 
 
     <!-- loader -->
@@ -259,8 +311,6 @@
     <script src="../../Content/js/bootstrap-datepicker.js"></script>
     <script src="../../Content/js/jquery.timepicker.min.js"></script>
     <script src="../../Content/js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="../../Content/js/google-map.js"></script>
     <script src="../../Content/js/main.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

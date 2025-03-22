@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="DentalClinicModel.Appointment" Width="1.5" PointX="1" PointY="1" />
         <EntityTypeShape EntityType="DentalClinicModel.subscription" Width="1.5" PointX="6.5" PointY="0.75" />
         <EntityTypeShape EntityType="DentalClinicModel.DentalNew" Width="1.5" PointX="8.75" PointY="1.25" />
+        <EntityTypeShape EntityType="DentalClinicModel.FeedBack" Width="1.5" PointX="0.875" PointY="4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

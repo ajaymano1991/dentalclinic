@@ -41,6 +41,16 @@
           <Property Name="isVerfied" Type="bit" Nullable="false" />
           <Property Name="isAvailable" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FeedbackText" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="PatientRegister">
           <Key>
             <PropertyRef Name="Id" />
@@ -61,11 +71,13 @@
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityContainer Name="DentalClinicModelStoreContainer">
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DentalNews" EntityType="Self.DentalNews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dentist" EntityType="Self.Dentist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedBack" EntityType="Self.FeedBack" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientRegister" EntityType="Self.PatientRegister" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subscription" EntityType="Self.subscription" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -79,6 +91,7 @@
           <EntitySet Name="Appointments" EntityType="DentalClinicModel.Appointment" />
           <EntitySet Name="subscriptions" EntityType="DentalClinicModel.subscription" />
           <EntitySet Name="DentalNews" EntityType="DentalClinicModel.DentalNew" />
+          <EntitySet Name="FeedBacks" EntityType="DentalClinicModel.FeedBack" />
         </EntityContainer>
         <EntityType Name="PatientRegister">
           <Key>
@@ -128,6 +141,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DentalNew">
           <Key>
@@ -136,6 +150,16 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FeedbackText" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -191,6 +215,7 @@
           <EntitySetMapping Name="subscriptions">
             <EntityTypeMapping TypeName="DentalClinicModel.subscription">
               <MappingFragment StoreEntitySet="subscription">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -201,6 +226,17 @@
               <MappingFragment StoreEntitySet="DentalNews">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedBacks">
+            <EntityTypeMapping TypeName="DentalClinicModel.FeedBack">
+              <MappingFragment StoreEntitySet="FeedBack">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="FeedbackText" ColumnName="FeedbackText" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
