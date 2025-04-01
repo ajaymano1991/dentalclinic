@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
@@ -258,19 +259,9 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
         public ActionResult AppointmentList()
         {
-
-            List<Appointment> appointmentList1 = db.Appointments.ToList();
-            List<Appointment> appointmentList = new List<Appointment>();
-            string s = Session["LoggedDentistID"].ToString();
-            int n = Convert.ToInt32(s);
-            foreach (var appointment in appointmentList1)
-            {
-                //if (appointment.DatientId == n)
-                //{
-                    appointmentList.Add(appointment);
-                //}
-
-            }
+            List<Appointment> appointmentList = db.Appointments.ToList();
+            //string s = Session["LoggedDentistID"].ToString();
+            //int n = Convert.ToInt32(s);
             ViewBag.appointmentList = appointmentList;
             return View();
         }
@@ -416,10 +407,15 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
               return RedirectToAction("Index");
 
         }
-        public ActionResult LoadAppointments()
+
+        public ActionResult Dashboard()
         {
-            var appointments = db.Appointments.ToList(); // Fetch from database
-            return PartialView("_AppointmentsList", appointments);
+            var patientCount = db.Appointments.Count();
+            var appointmentCount = db.Appointments.Count();
+
+            ViewBag.PatientCount = patientCount;
+            ViewBag.AppointmentCount = appointmentCount;
+            return View();
         }
 
 

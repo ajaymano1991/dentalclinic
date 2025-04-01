@@ -34,6 +34,15 @@
     <link rel="stylesheet" href="@Url.Content("../../Content/css/flaticon.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/icomoon.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/style.css")">
+    <style>
+        #appointmentsContainer {
+            position: relative;
+            top: -50px;
+            right: 0;
+           
+        }
+    </style>
+
 </head>
 <body class="" id="Adminhome">
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary" id="ftco-navbar">
@@ -45,7 +54,7 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item nav-link"> @Html.ActionLink("Home", "Index", "Home", new { Style = "color:White" })</li>
+                    <li class="nav-item nav-link"> @Html.ActionLink("Home", "DentistPanel", "Home", new { Style = "color:White" })</li>
                     <li class="nav-item cta nav-link"> @Html.ActionLink("Logout", "Logout", "Home", new { Style = "color:White" })</li>
 
                 </ul>
@@ -53,9 +62,10 @@
         </div>
     </nav>
     <div class="wrapper ">
+        <div id="appointmentsContainer" class="mt-0"></div>
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="~/Content/img/sidebar-1.jpg">
             <div class="logo">
-                <a href="#Adminhome" class="simple-text logo-normal">
+                <a href="/Home/DentistPanel" class="simple-text logo-normal">
                     Welcome <br />
                     @Session["LoggedDentistFullName"]
                 </a>
@@ -68,14 +78,14 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    @*<li class="nav-item ">
                         <a class="nav-link" href="./user.html">
                             <i class="material-icons">person</i>
                             <p>Dentist Profile</p>
                         </a>
-                    </li>
+                    </li>*@
                     <li class="nav-item ">
-                        <a class="nav-link" href="./tables.html">
+                        <a class="nav-link" href="/Home/DentistPanel">
                             <i class="material-icons">content_paste</i>
                             <p>Patient List</p>
                         </a>
@@ -83,7 +93,7 @@
 
 
                     <li class="nav-item ">
-                        <a class="nav-link" href="./map.html">
+                        <a class="nav-link" href="/Home/DentistPanel">
                             <i class="material-icons">location_ons</i>
                             <p>Prescriptions</p>
                         </a>
@@ -104,11 +114,7 @@
 
                 </ul>
             </div>
-
-
         </div>
-
-        <div id="appointmentsContainer"></div>
     </div>
 
     <!--   Core JS Files   -->
@@ -331,11 +337,25 @@
 
         });</script>
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                 url: '@Url.Action("Dashboard", "Home")',
+                 type: 'GET',
+                 success: function (data) {
+                     $("#appointmentsContainer").html(data);
+                 },
+                 error: function () {
+                     alert("Error loading dashboard.");
+                 }
+             });
+
+
+
         $("#loadAppointments").click(function (e) {
             e.preventDefault();
             $.ajax({
-                url: '@Url.Action("LoadAppointments", "Dentist")',
+                url: '@Url.Action("AppointmentList", "Home")',
                 type: 'GET',
                 success: function (data) {
                     $("#appointmentsContainer").html(data);
