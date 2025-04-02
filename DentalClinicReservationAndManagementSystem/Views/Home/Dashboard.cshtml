@@ -1,0 +1,121 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <h2 class="text-center">📊 Dashboard</h2>
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-center">
+                    <canvas id="patientsChart" style="max-width: 250px; max-height: 250px;"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="appointmentsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include jQuery and Chart.js -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var patientCount = parseInt("@ViewBag.PatientCount");
+        var appointmentCount = parseInt("@ViewBag.AppointmentCount");
+
+        if (isNaN(patientCount) || isNaN(appointmentCount)) {
+            console.error("Error: Patient or Appointment count is not valid.");
+            return;
+        }
+
+        // Get canvas context
+        var ctxPatients = document.getElementById("patientsChart").getContext('2d');
+        var ctxAppointments = document.getElementById("appointmentsChart").getContext('2d');
+
+        // Create gradient for Patients Chart
+        var gradientPatients = ctxPatients.createLinearGradient(0, 0, 0, 400);
+        gradientPatients.addColorStop(0, 'rgba(0, 123, 255, 0.8)');
+        gradientPatients.addColorStop(1, 'rgba(0, 123, 255, 0.2)');
+
+        // Patients Chart (3D Doughnut)
+        var patientsChart = new Chart(ctxPatients, {
+            type: 'doughnut',
+            data: {
+                labels: ["Patients"],
+                datasets: [{
+                    label: "Total Patients",
+                    data: [patientCount, 100 - patientCount],
+                    backgroundColor: [gradientPatients, '#eee'],
+                    borderWidth: 3,
+                    hoverOffset: 8 // Smaller 3D effect
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,  // Allow resizing
+                cutout: '75%',  // Makes the doughnut thinner (smaller effect)
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Appointments Chart (Mixed Bar + Line Chart)
+        var gradientAppointments = ctxAppointments.createLinearGradient(0, 0, 0, 400);
+        gradientAppointments.addColorStop(0, 'rgba(255, 99, 132, 0.8)');
+        gradientAppointments.addColorStop(1, 'rgba(255, 99, 132, 0.2)');
+
+        var appointmentsChart = new Chart(ctxAppointments, {
+            type: 'bar', // Mixed chart with bar & line
+            data: {
+                labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+                datasets: [
+                    {
+                        type: 'line', // Line for trend
+                        label: "Trend Line",
+                        data: [appointmentCount / 4, appointmentCount / 3, appointmentCount / 2, appointmentCount],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4 // Smooth curve effect
+                    },
+                    {
+                        type: 'bar', // Bars for actual values
+                        label: "Appointments",
+                        data: [appointmentCount / 4, appointmentCount / 3, appointmentCount / 2, appointmentCount],
+                        backgroundColor: gradientAppointments,
+                        borderWidth: 2,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { enabled: true }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: true,
+                            drawBorder: false,
+                            color: "rgba(200, 200, 200, 0.2)"
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+    });
+</script>

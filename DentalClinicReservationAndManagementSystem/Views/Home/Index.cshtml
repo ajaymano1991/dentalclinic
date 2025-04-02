@@ -3,294 +3,639 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using DentalClinicReservationAndManagementSystem;
-@section Scripts {
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-<section class="ftco-section ftco-services">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-2">Our Service Keeps you Smile</h2>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-tooth-1"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Teeth Whitening</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-dental-care"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Teeth Cleaning</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-tooth-with-braces"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Quality Brackets</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-anesthesia"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Modern Anesthetic</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-wrap mt-5">
-        <div class="row d-flex no-gutters">
-            <div class="col-md-6 img" style="background-image: url(../../Content/images/about-2.jpeg);">
-            </div>
-            <div class="col-md-6 d-flex">
-                <div class="about-wrap">
-                    <div class="heading-section heading-section-white mb-5 ftco-animate">
-                        <h2 class="mb-2">Dentacare with a personal touch</h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    </div>
-                    <div class="list-services d-flex ftco-animate">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-check2"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Well Experience Dentist</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        </div>
-                    </div>
-                    <div class="list-services d-flex ftco-animate">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-check2"></span>
-                        </div>
-                        <div class="text">
-                            <h3>High Technology Facilities</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        </div>
-                    </div>
-                    <div class="list-services d-flex ftco-animate">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-check2"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Comfortable Clinics</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-3">Meet Our Experience Dentist</h2>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences</p>
-            </div>
-        </div>
-        <div class="row">
+<style>
+    .transparent-input {
+        background: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: white !important;
+    }
 
-            @{
-                    
-                    foreach (Dentist d in ViewBag.dentistList)
-                    {
-                    <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
-                        <div class="staff">
-                            <div class="img mb-4" style="background-image: url(../../Content/images/person_5.jpg);"></div>
-                            <div class="info text-center">
-                                <h3><a href="teacher-single.html">@d.Name</a></h3>
-                                <span class="position">Dentist</span>
-                                <div class="text">
-                                    <p>@d.institute</p>
-                                    <ul class="ftco-social">
-                                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                                        <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                }
+        .transparent-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+    .custom-submit {
+        background-color: #90EE90 !important; /* Light Green */
+        border: none;
+        color: black;
+    }
+
+        .custom-submit:hover {
+            background-color: #7CFC00 !important; /* Slightly darker green on hover */
+        }
+
+    .rating i {
+        font-size: 24px;
+        color: black;
+        cursor: pointer;
+        transition: color 0.4s;
+    }
+
+    @@keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-3px);
+        }
+
+        50% {
+            transform: translateX(3px);
+        }
+
+        75% {
+            transform: translateX(-3px);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    .rating i.shake {
+        animation: shake 0.3s ease;
+    }
+
+    .rating i.text-warning {
+        color: gold !important; /* Highlight selected teeth */
+    }
+
+    .img-wrap img {
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .img-wrap img:hover {
+            transform: scale(1.5);
+        }
+
+    .appointment-form {
+        background: #0056b3;
+        border-radius: 12px;
+        box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.8); /* Soft white shadow */
+        padding: 30px;
+    }
+
+    .form-control option {
+        color: black !important; /* Ensures options have black text */
+    }
+
+    .appointment-form .input-group-text {
+        background: #007bff;
+        color: #fff;
+        border: none;
+    }
+
+    .appointment-form .btn-primary {
+        background: #007bff;
+        border: none;
+        transition: 0.3s;
+    }
+
+        .appointment-form .btn-primary:hover {
+            background: #0056b3;
+        }
+
+    h2 {
+        color: #333;
+        text-align: center;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 10px;
+        padding: 5px;
+    }
+
+    .contactUs {
+        max-width: 700px;
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .info {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: flex-start;
+    }
+
+        .info:last-child {
+            border-bottom: none;
+        }
+
+    .icon {
+        font-size: 24px;
+        margin-right: 15px;
+        color: #007bff;
+    }
+
+    .details {
+        flex-grow: 1;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .scroll-container {
+        height: 150px; /* Adjust height as needed */
+        overflow: hidden;
+        position: relative;
+    }
+
+    .scroll-content {
+        display: block;
+        animation: scrollUp 10s linear infinite; /* Adjust speed */
+    }
+
+    .dental-news-container {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: #46b7de;
+    }
+
+    .news-heading {
+        font-size: 20px;
+        color: #fff;
+        margin-top: 40px;
+        margin-bottom: 15px;
+    }
+
+    .scroll-container {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        padding: 10px;
+    }
+
+    .scroll-content {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        animation: scrollUp 12s linear infinite;
+    }
+
+        .scroll-content li {
+            padding: 10px;
+            margin-bottom: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            color: white;
+            font-size: 20px;
+        }
+
+    @@keyframes scrollUp {
+        0% {
+            transform: translateY(0%);
+        }
+
+        100% {
+            transform: translateY(-50%);
+        }
+    }
+
+    @@keyframes scrollUp {
+        from {
+            transform: translateY(100%);
+        }
+
+        to {
+            transform: translateY(-100%);
+        }
+    }
+
+    .staff .img-wrap {
+        width: 160px; /* Circle size */
+        height: 160px;
+        overflow: hidden;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+    }
+
+        .staff .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .staff .img-wrap:hover {
+            border-radius: 10px; /* Rectangle on hover */
+            width: 180px; /* Increase size */
+            height: 280px;
+            position: absolute;
+            z-index: 10; /* Ensures it appears above other content */
+        }
+
+            .staff .img-wrap:hover img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain; /* Ensures full image is visible */
             }
-
-
-            
-        </div>
-        <div class="row  mt-5 justify-conten-center">
-            <div class="col-md-8 ftco-animate">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi vero accusantium sunt sit aliquam ipsum molestias autem perferendis, incidunt cumque necessitatibus cum amet cupiditate, ut accusamus. Animi, quo. Laboriosam, laborum.</p>
+</style>
+<section class="home-slider owl-carousel">
+    <div class="slider-item" style="background-image: url('../../Content/images/display_3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
+        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
+        <div class="container" style="height: 100%;">
+            <div class="row slider-text align-items-center justify-content-start" style="height: 100%;">
+                <div class="col-md-8 text ftco-animate" style="color: #fff; text-align: left; padding: 50px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; max-width: 70%;">
+                    <h1 class="mb-4" style="font-size: 3rem; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); color: cyan;">Helping Your <span style="color: #f8d210;">Stay Happy One</span></h1>
+                    <h3 class="subheading" style="font-size: 2rem; font-style: italic; font-weight: bold; color: cyan;">Everyday We Bring Hope and Smile to the Patient We Serve</h3>
+                </div>
             </div>
         </div>
     </div>
-</section>
-<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(../../Content/images/bg_1.jpeg);" data-stellar-background-ratio="0.5">
-    <div class="container">
-        <div class="row d-flex align-items-center">
-            <div class="col-md-3 aside-stretch py-5">
-                <div class=" heading-section heading-section-white ftco-animate pr-md-4">
-                    <h2 class="mb-3">Achievements</h2>
-                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+
+    <div class="slider-item" style="background-image: url('../../Content/images/display_1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
+        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
+        <div class="container" style="height: 100%;">
+            <div class="row slider-text align-items-center justify-content-start" style="height: 100%;">
+                <div class="col-md-8 text ftco-animate" style="color: #fff; text-align: left; padding: 50px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; max-width: 70%;">
+                    <h1 class="mb-4" style="font-size: 3rem; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); color: crimson;">Smile Makes <br><span style="color: #f8d210;">A Lasting Impression</span></h1>
+                    <h3 class="subheading" style="font-size: 2rem; font-weight: bold; font-style: italic; color: crimson;">Your Health is Our Top Priority with Comprehensive, Affordable Medical.</h3>
                 </div>
             </div>
-            <div class="col-md-9 py-5 pl-md-5">
-                <div class="row">
-                    <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                        <div class="block-18">
-                            <div class="text">
-                                <strong class="number" data-number="14">0</strong>
-                                <span>Years of Experience</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                        <div class="block-18">
-                            <div class="text">
-                                <strong class="number" data-number="4500">0</strong>
-                                <span>Qualified Dentist</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                        <div class="block-18">
-                            <div class="text">
-                                <strong class="number" data-number="4200">0</strong>
-                                <span>Happy Smiling Customer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                        <div class="block-18">
-                            <div class="text">
-                                <strong class="number" data-number="320">0</strong>
-                                <span>Patients Per Year</span>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+
+    <div class="slider-item" style="background-image: url('../../Content/images/display_2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
+        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
+        <div class="container" style="height: 100%;">
+            <div class="row slider-text align-items-center justify-content-start" style="height: 100%;">
+                <div class="col-md-8 text ftco-animate" style="color: #fff; text-align: left; padding: 50px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; max-width: 70%;">
+                    <h1 class="mb-4" style="font-size: 3rem; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); color: firebrick;">Bringing Care <span style="color: #f8d210;">To Your Family</span></h1>
+                    <h3 class="subheading" style="font-size: 2rem; font-style: italic; font-weight: bold; color: firebrick;">We Ensure the Best Medical Services for You and Your Loved Ones</h3>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="ftco-section">
+
+
+
+
+
+
+
+<section id="appointment-section" class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container-fluid px-md-0">
+        <div class="row no-gutters">
+            <div class="col-md-3 d-flex align-items-stretch">
+                <div class="dental-news-container">
+                    <h2 class="news-heading">😊 Bright Smiles, Happy Lives!</h2>
+
+                    @if (ViewBag.DentalNews != null && ViewBag.DentalNews.Count > 0)
+                    {
+                        <div class="scroll-container">
+                            <ul class="scroll-content">
+                                @foreach (var news in ViewBag.DentalNews)
+                                {
+                                    <li><h6>@news.Description</h6></li>
+                                }
+
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="no-news">No dental news available.</p>
+                    }
+                </div>
+
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch ">
+                <div class="consultation consul w-100 px-4 px-md-5">
+                    <div class="text-center">
+                        <h3 class="mb-4">Make An Appoinment</h3>
+                    </div>
+                    @model DentalClinicReservationAndManagementSystem.Models.Appointment
+                    @using DentalClinicReservationAndManagementSystem.Models
+                    @using (Html.BeginForm("TakeAppointment", "Home", FormMethod.Post, new { @class = "appointment-form well well-lg" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <!-- Patient Name -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Full Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        @Html.TextBoxFor(model => model.PatientName, new { @class = "form-control", @placeholder = "Enter your full name", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Mobile Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = "Enter your phone number", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Enter your email", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reason for Appointment -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Reason for Appointment</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                        @Html.DropDownListFor(model => model.ReasonForAppointment, new SelectList(new[]
+                                        {
+                                            "ROUTINE DENTAL CHECKUP",
+                                            "ROOT CANAL THERAPY",
+                                            "DENTAL EXTRACTION AND IMPACTION",
+                                            "CROWNS AND BRIDGE",
+                                            "DENTURES",
+                                            "DENTAL IMPLANTS",
+                                            "DIGITAL SMILE DESIGNING",
+                                            "FULL MOUTH REHABILITATION",
+                                            "GUM DISEASE TREATMENT",
+                                            "LASER TREATMENT",
+                                            "ORTHODONTIC – BRACES",
+                                            "CLEAR ALIGNERS",
+                                            "PEDIATRIC DENTISTRY",
+                                            "OTHERS"
+                                        }), "Select a reason", new { @class = "form-control", required = "required", style = "color: black;" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preferred Date & Time -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Preferred Date & Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                        @Html.TextBoxFor(model => model.PreferredDateTime, new { @class = "form-control", @type = "datetime-local", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="glyphicon glyphicon-check"></i> Make Appointment
+                                </button>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-items-stretch">
+                <div class="consultation w-100 text-center px-4 px-md-5">
+                    <h3 class="mb-4">Today's Appointments</h3>
+                    <p></p>
+                    <div>
+                        @if (ViewBag.TodaysAppointments != null && ViewBag.TodaysAppointments.Count > 0)
+                        {
+                            <div class="scroll-container">
+                                <ul class="scroll-content">
+                                    @foreach (var appointment in ViewBag.TodaysAppointments)
+                                    {
+                                        <li><h3>@appointment.PreferredDateTime.ToString("yyyy-MM-dd HH:mm")</h3></li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>No appointments for today.</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section ftco-services" id="Service-Section">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-3">Our Best Pricing</h2>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <h2 class="mb-2 text-primary">Enhancing Your Smile, One Step at a Time</h2>
+                <p class="text-muted">Experience professional dental care with cutting-edge treatments designed to keep your smile healthy and bright.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Basic</h3>
-                        <p><span class="price">$24.50</span> <span class="per">/ session</span></p>
+            <!-- Teeth Whitening -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-tooth text-primary"></span>
                     </div>
-                    <ul>
-                        <li>Diagnostic Services</li>
-                        <li>Professional Consultation</li>
-                        <li>Tooth Implants</li>
-                        <li>Surgical Extractions</li>
-                        <li>Teeth Whitening</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Teeth Whitening</h3>
+                        <p>Brighten your smile with our professional teeth whitening treatments, designed to remove stains and enhance your confidence.</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Standard</h3>
-                        <p><span class="price">$34.50</span> <span class="per">/ session</span></p>
+            <!-- Teeth Cleaning -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-dental-care text-primary"></span>
                     </div>
-                    <ul>
-                        <li>Diagnostic Services</li>
-                        <li>Professional Consultation</li>
-                        <li>Tooth Implants</li>
-                        <li>Surgical Extractions</li>
-                        <li>Teeth Whitening</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Teeth Cleaning</h3>
+                        <p>Prevent cavities and gum disease with our thorough cleaning services, leaving your teeth refreshed and healthier.</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry active pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Premium</h3>
-                        <p><span class="price">$54.50</span> <span class="per">/ session</span></p>
+            <!-- Quality Brackets -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-tooth-with-braces text-primary"></span>
                     </div>
-                    <ul>
-                        <li>Diagnostic Services</li>
-                        <li>Professional Consultation</li>
-                        <li>Tooth Implants</li>
-                        <li>Surgical Extractions</li>
-                        <li>Teeth Whitening</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Quality Brackets</h3>
+                        <p>Strong, reliable, and comfortable brackets to support your orthodontic journey towards a straighter smile.</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Platinum</h3>
-                        <p><span class="price">$89.50</span> <span class="per">/ session</span></p>
+            <!-- Modern Anesthetic -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-anesthesia text-primary"></span>
                     </div>
-                    <ul>
-                        <li>Diagnostic Services</li>
-                        <li>Professional Consultation</li>
-                        <li>Tooth Implants</li>
-                        <li>Surgical Extractions</li>
-                        <li>Teeth Whitening</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Modern Anesthetic</h3>
+                        <p>Experience pain-free treatments with the latest anesthetic technology for maximum comfort and safety.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Dental Calculus -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-dental-care text-primary"></span>
+                    </div>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Dental Calculus</h3>
+                        <p>Eliminate tartar buildup and protect your gums with our professional calculus removal service.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Paradontosis -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-bacteria text-primary"></span>
+                    </div>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Paradontosis</h3>
+                        <p>Combat gum disease with our expert periodontal treatments, promoting strong gums and lasting oral health.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Dental Implants -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-dentist text-primary"></span>
+                    </div>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Dental Implants</h3>
+                        <p>Restore your smile with natural-looking dental implants for a permanent and comfortable tooth replacement.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Tooth Braces -->
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
+                    <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
+                        <span class="flaticon-dental-care-1 text-primary"></span>
+                    </div>
+                    <div class="media-body mt-3">
+                        <h3 class="heading">Tooth Braces</h3>
+                        <p>Achieve perfectly aligned teeth with our advanced braces, designed for comfort and efficiency.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="ftco-section-parallax">
-    <div class="parallax-img d-flex align-items-center">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-                    <h2>Subcribe to our Newsletter</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-                    <div class="row d-flex justify-content-center mt-5">
-                        <div class="col-md-8">
-                            <form action="#" class="subscribe-form">
-                                <div class="form-group d-flex">
-                                    <input type="text" class="form-control" placeholder="Enter email address">
-                                    <input type="submit" value="Subscribe" class="submit px-3">
-                                </div>
-                            </form>
+
+<section class="ftco-section" id="About-Section" style="background: linear-gradient(to bottom, #f8f9fa, #e9ecef); padding: 60px 0;">
+    <div class="container">
+        <!-- Section Heading -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: #333; text-transform: uppercase; letter-spacing: 1px;">About Us</h2>
+            </div>
+        </div>
+
+        <!-- First Set -->
+        <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
+            <div class="col-md-4 ftco-animate img about-image" style="background-image: url('../../content/images/bg_1.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
+            <div class="col-md-8 ftco-animate pr-md-5" style="padding: 20px;">
+                <h2 class="mb-4" style="color: #007bff; font-weight: bold;">We Offer High-Quality Services</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">Krishna Dental Clinic and Implant Centre was established in 2025 with a vision of providing high-quality dental care.</p>
+            </div>
+        </div>
+
+        <!-- Second Set -->
+        <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
+            <div class="col-md-4 ftco-animate img about-image order-md-last" style="background-image: url('../../content/images/welcome.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
+            <div class="col-md-8 ftco-animate pr-md-5 order-md-first" style="padding: 20px;">
+                <h2 class="mb-4" style="color: #007bff; font-weight: bold;">To Accommodate All Patients</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">At Krishna Dental Clinic and Implant Centre, we combine a skilled and friendly team with a welcoming environment to ensure a comfortable experience for our patients. Our personalized approach is designed to deliver the exceptional care they deserve.</p>
+            </div>
+        </div>
+
+        <!-- Third Set -->
+        <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
+            <div class="col-md-4 ftco-animate img about-image" style="background-image: url('../../content/images/bg_3.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
+            <div class="col-md-8 ftco-animate pr-md-5" style="padding: 20px;">
+                <h2 class="mb-4" style="color: #007bff; font-weight: bold;">Help Our Customers' Needs</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">With advanced treatments, cutting-edge technology, and affordable pricing, we are committed to bringing world-class dental services to the people of Pondicherry. Our clinic is equipped with state-of-the-art dental equipment featuring multi-positional functionality, ensuring maximum comfort for our patients.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contactus-section" class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container-wrap mt-5">
+        <div class="row justify-content-center pb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <h2 class="mb-1">Contact Us</h2>
+            </div>
+        </div>
+        <div class="row d-flex no-gutters align-items-stretch">
+            <!-- Google Map Section -->
+            <div class="col-md-6 contactUs d-flex align-items-stretch">
+                <div id="googleMap" style="width:100%; height:450px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);"></div>
+            </div>
+            <!-- Contact Info Section -->
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="about-wrap w-100 p-4" style="background: #f8f9fa; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+                    <div class="contactUs">
+                        <h2 class="mb-4 text-center">Our Clinic Information</h2>
+                        <div class="info d-flex align-items-center mb-3">
+                            <i class="fa-solid fa-location-dot icon text-primary" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                            <div>
+                                <strong>Location</strong><br>
+                                NO.130, Kamaraj Salai, Puducherry - 605013
+                            </div>
+                        </div>
+                        <div class="info d-flex align-items-center mb-3">
+                            <i class="fa-solid fa-phone icon text-success" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                            <div>
+                                <strong>Call Us</strong><br>
+                                +91-9190144066<br>
+                                +91-8778653142
+                            </div>
+                        </div>
+                        <div class="info d-flex align-items-center mb-3">
+                            <i class="fa-solid fa-envelope icon text-danger" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                            <div>
+                                <strong>Email</strong><br>
+                                krishnadentalclinic25@gmail.com
+                            </div>
+                        </div>
+                        <div class="info d-flex align-items-center">
+                            <i class="fa-solid fa-clock icon text-warning" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                            <div>
+                                <strong>Working Hours</strong><br>
+                                Morning: 9:30 AM - 1:30 PM IST<br>
+                                Evening: 4:30 PM - 9:30 PM IST
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -298,313 +643,405 @@
         </div>
     </div>
 </section>
+
+
+
+
+
+<section id="Doctors-Section" class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-8 text-center heading-section ftco-animate">
+                <h2 class="mb-4">Our Qualified Doctors</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-lg-2 ftco-animate" data-toggle="modal" data-target="#doctorModal" data-name="Dr.K.Vignesnh" data-position="Chief Dental SurgeonPeriodontist, Implantologist & Laser Specialist" data-image="/Content/images/Profile-1.jpg" data-description="">
+                <div class="staff text-center">
+                    <div class="img-wrap d-flex align-items-center justify-content-center">
+                        <img src="~/Content/images/profile-1.jpg" class="img-fluid" style="border-radius: 10px; cursor: pointer;">
+                    </div>
+                    <h3>Dr.K.Vignesh</h3>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-2 ftco-animate" data-toggle="modal" data-target="#doctorModal" data-name="Dr. Rachel Parker" data-position="Dentist" data-image="/Content/images/profile-2.jpg" data-description="">
+                <div class="staff text-center">
+                    <div class="img-wrap d-flex align-items-center justify-content-center">
+                        <img src="~/Content/images/profile-2.jpg" class="img-fluid" style="border-radius: 10px; cursor: pointer;">
+                    </div>
+                    <h3>Dr.I.Ragul</h3>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-2 ftco-animate" data-toggle="modal" data-target="#doctorModal" data-name="Dr.I.Ragul" data-position="Consultant Prosthodontist & Implantologist" data-image="/Content/images/profile-3.jpg" data-description="">
+                <div class="staff text-center">
+                    <div class="img-wrap d-flex align-items-center justify-content-center">
+                        <img src="~/Content/images/profile-3.jpg" class="img-fluid" style="border-radius: 10px; cursor: pointer;">
+                    </div>
+                    <h3>Dr.Ramya Raja</h3>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-2 ftco-animate" data-toggle="modal" data-target="#doctorModal" data-name="Dr.Ramya Raja" data-position="Consultant Pediatric Dentist" data-image="/Content/images/profile-4.jpg" data-description="">
+                <div class="staff text-center">
+                    <div class="img-wrap d-flex align-items-center justify-content-center">
+                        <img src="~/Content/images/profile-4.jpg" class="img-fluid" style="border-radius: 10px; cursor: pointer;">
+                    </div>
+                    <h3>Dr.Alicia Henderson</h3>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-2 ftco-animate" data-toggle="modal" data-target="#doctorModal" data-name="Dr. Rahul Chaurasia " data-position="Consultant Root Canal Specialist" data-image="/Content/images/person_8.jpg" data-description="I am an ambitious workaholic, but apart from that, pretty simple person.">
+                <div class="staff text-center">
+                    <div class="img-wrap d-flex align-items-center justify-content-center">
+                        <img src="/Content/images/person_8.jpg" class="img-fluid" style="border-radius: 10px; cursor: pointer;">
+                    </div>
+                    <h3>Dr. Rahul Chaurasia</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Doctor Details Modal -->
+<div class="modal fade" id="doctorModal" tabindex="-1" role="dialog" aria-labelledby="doctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="doctorName">Doctor Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="doctorImage" src="" class="img-fluid mb-3" style="max-width: 100%; border-radius: 10px;">
+                <h5 id="doctorPosition"></h5>
+                <p id="doctorDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@*<section class="ftco-section ftco-counter" id="section-counter" style="background-image: url(/Content/images/achivement.jpeg);">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-3 aside-stretch py-5">
+                    <div class=" heading-section heading-section-white ftco-animate pr-md-4">
+                        <h2 style="color:black">Achievements</h2>
+                    </div>
+                </div>
+                <div class="col-md-9 py-5 pl-md-5">
+                    <div class="row">
+                        <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="14">0</strong>
+                                    <span>Years of Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="4500">0</strong>
+                                    <span>Qualified Dentist</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="4200">0</strong>
+                                    <span>Happy Smiling Customer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="320">0</strong>
+                                    <span>Patients Per Year</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+
 <section class="ftco-section testimony-section bg-light">
     <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-2">Testimony</h2>
-                <span class="subheading">Our Happy Customer Says</span>
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-8 text-center heading-section">
+                <span class="subheading">Testimonials</span>
+                <h2 class="mb-4">Our Patients Say About Us</h2>
             </div>
         </div>
-        <div class="row justify-content-center ftco-animate">
-            <div class="col-md-8">
-                <div class="carousel-testimony owl-carousel ftco-owl">
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(../../Content/images/person_1.jpg)">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                                <p class="name">Dennis Green</p>
-                                <span class="position">Marketing Manager</span>
-                            </div>
+
+        <div class="owl-carousel feedback-carousel">
+            @foreach (var feedback in ViewBag.feedBack)
+            {
+                <div class="item">
+                    <div class="testimony-wrap d-flex">
+                        <div class="user-img">
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(../../Content/images/person_2.jpg)">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Dennis Green</p>
-                                <span class="position">Interface Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(../../Content/images/person_3.jpg)">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Dennis Green</p>
-                                <span class="position">UI Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(../../Content/images/person_1.jpg)">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Dennis Green</p>
-                                <span class="position">Web Developer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap p-4 pb-5">
-                            <div class="user-img mb-5" style="background-image: url(../../Content/images/person_1.jpg)">
-                                <span class="quote d-flex align-items-center justify-content-center">
-                                    <i class="icon-quote-left"></i>
-                                </span>
-                            </div>
-                            <div class="text text-center">
-                                <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                <p class="name">Dennis Green</p>
-                                <span class="position">System Analytics</span>
-                            </div>
+                        <div class="text pl-4 bg-light">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            <p>@feedback.FeedbackText</p>
+                            <p class="name">@feedback.PatientName</p>
+                            <span class="position">
+                                @for (int i = 0; i < feedback.Rating; i++)
+                                {
+                                    <i class="fa-solid fa-tooth text-warning"></i> <!-- Teeth Rating -->
+                                }
+                            </span>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
+
     </div>
 </section>
-<section class="ftco-gallery">
-    <div class="container-wrap">
-        <div class="row no-gutters">
-            <div class="col-md-3 ftco-animate">
-                <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-1.jpg);">
-                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-2.jpg);">
-                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-3.jpg);">
-                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-4.jpg);">
-                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                        <span class="icon-search"></span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-2">Latest Blog</h2>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('../../Content/images/image_1.jpg');">
+@*<section class="ftco-gallery">
+        <div class="container-wrap">
+            <div class="row no-gutters">
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-1.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
+                        </div>
                     </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">Sep. 20, 2018</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry" data-aos-delay="100">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('../../Content/images/image_2.jpg');">
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-2.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
+                        </div>
                     </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">Sep. 20, 2018</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry" data-aos-delay="200">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('../../Content/images/image_3.jpg');">
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-3.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
+                        </div>
                     </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">Sep. 20, 2018</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                </div>
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-4.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
                         </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="ftco-quote">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 pr-md-5 aside-stretch py-5 choose">
-                <div class="heading-section heading-section-white mb-5 ftco-animate">
-                    <h2 class="mb-2">DentaCare Procedure &amp; High Quality Services</h2>
-                </div>
-                <div class="ftco-animate">
-                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. Because there were thousands of bad Commas, wild Question Marks and devious Semikoli</p>
-                    <ul class="un-styled my-5">
-                        <li><span class="icon-check"></span>Consectetur adipisicing elit</li>
-                        <li><span class="icon-check"></span>Adipisci repellat accusamus</li>
-                        <li><span class="icon-check"></span>Tempore reprehenderit vitae</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-6 py-5 pl-md-5">
-                <div class="heading-section mb-5 ftco-animate">
-                    <h2 class="mb-2">Get a Free Quote</h2>
-                </div>
-                <form action="#" class="ftco-animate">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Full Name">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Phone">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Website">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="submit" value="Get a Quote" class="btn btn-primary py-3 px-5">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>*@
+
+
 <div id="map"></div>
 <footer class="ftco-footer ftco-bg-dark ftco-section">
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-3">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">DentaCare.</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <div class="ftco-footer-widget">
+                    <h2 class="ftco-heading-2">Krishna Dental Clinic</h2>
+                    <p>Krishna Dental Clinic and Implant Centre was established in 2025 with a vision of providing high-quality dental care.</p>
                 </div>
                 <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
                     <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                     <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                    <li class="ftco-animate"><a href="https://www.instagram.com/krishnadent" target="_blank"><span class="icon-instagram"></span></a></li>
                 </ul>
             </div>
             <div class="col-md-2">
-                <div class="ftco-footer-widget mb-4 ml-md-5">
-                    <h2 class="ftco-heading-2">Quick Links</h2>
+                <div class="ftco-footer-widget">
+                    <h2 class="ftco-heading-2" style="text-align:left">Quick Links</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">About</a></li>
-                        <li><a href="#" class="py-2 d-block">Features</a></li>
-                        <li><a href="#" class="py-2 d-block">Projects</a></li>
-                        <li><a href="#" class="py-2 d-block">Blog</a></li>
-                        <li><a href="#" class="py-2 d-block">Contact</a></li>
+                        <li><a href="#About-Section" class="py-2 d-block">About</a></li>
+                        <li><a href="#Service-Section" class="py-2 d-block">Services</a></li>
+                        <li><a href="#Doctors-Section" class="py-2 d-block">Dentists</a></li>
+                        <li><a href="#appointment-section" class="py-2 d-block">Make Appoinment</a></li>
+                        <li><a href="#contactus-section" class="py-2 d-block">Contact</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-4 pr-md-4">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Recent Blog</h2>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(../../Content/images/image_1.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
+            <div class="col-md-4">
+                <div class="ftco-footer-widget">
+                    <h2 class="ftco-heading-2">Subscribe Us!</h2>
+
+                    <form action="@Url.Action("subscription", "Home")" method="post" class="subscribe-form">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <input type="text" name="email" class="form-control mb-2 text-center" placeholder="Enter email address" required>
+                            <input type="text" name="phoneNumber" class="form-control mb-2 text-center"
+                                   placeholder="Enter phone number" maxlength="10"
+                                   pattern="[6789][0-9]{9}" title="Phone number must start with 9, 8, 7, or 6 and be 10 digits long"
+                                   required>
+                            <input type="submit" value="Subscribe" class="form-control submit px-3">
                         </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(../../Content/images/image_2.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Office</h2>
-                    <div class="block-23 mb-3">
-                        <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                        </ul>
+                <div class="ftco-footer-widget ">
+                    <div class="ftco-footer-widget">
+                        <h2 class="ftco-heading-2 text-center text-white">Give Your Feedback</h2>
+                        <form action="@Url.Action("SubmitFeedback", "Home")" method="post" class="feedback-form">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <input type="text" name="PatientName" class="form-control mb-3 text-center rounded transparent-input"
+                                       placeholder="Enter your name" required>
+
+                                <textarea name="FeedbackText" class="form-control mb-3 text-center rounded transparent-input"
+                                          placeholder="Enter your feedback" required></textarea>
+
+                                <!-- Star Rating System -->
+
+                                <div class="rating text-center mb-3">
+                                    <input type="hidden" name="Rating" id="ratingValue" required>
+                                    <i class="fa-solid fa-tooth" data-value="1"></i>
+                                    <i class="fa-solid fa-tooth" data-value="2"></i>
+                                    <i class="fa-solid fa-tooth" data-value="3"></i>
+                                    <i class="fa-solid fa-tooth" data-value="4"></i>
+                                    <i class="fa-solid fa-tooth" data-value="5"></i>
+                                </div>
+
+                                <input type="submit" value="Submit" class="btn btn-success w-100 rounded-pill custom-submit">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
+            @*<div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Office</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">130,Kamaraj Salai, Puducherry - 605013</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 9190144066</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">krishnadentalclinic25@gmail.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
         </div>
         <div class="row">
-            
+
         </div>
     </div>
 </footer>
+@section Scripts
+    {
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+    <script>
+        var map = L.map('googleMap').setView([11.937833, 79.818772], 17);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '<a href="https://www.openstreetmap.org/copyright"></a>'
+        }).addTo(map);
+
+        L.marker([11.937833, 79.818772]).addTo(map)
+            .bindTooltip('Krishna Dental clinic & Implant centre')
+            .openPopup();
+
+
+
+
+        $(document).ready(function () {
+            $('.ftco-animate').click(function () {
+                var name = $(this).data('name');
+                var position = $(this).data('position');
+                var image = $(this).data('image');
+                var description = $(this).data('description');
+
+                // Debugging - Check if values are correctly retrieved
+                console.log("Name:", name);
+                console.log("Position:", position);
+                console.log("Image:", image);
+                console.log("Description:", description);
+
+                // Update modal content
+                $('#doctorName').text(name);
+                $('#doctorPosition').text(position);
+                $('#doctorImage').attr('src', image);
+                $('#doctorDescription').text(description);
+
+                // Show modal manually (Bootstrap requires this sometimes)
+                $('#doctorModal').modal('show');
+            });
+
+
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const teeth = document.querySelectorAll(".rating .fa-tooth");
+            const ratingInput = document.getElementById("ratingValue");
+
+            teeth.forEach(tooth => {
+                tooth.addEventListener("click", function () {
+                    const value = this.getAttribute("data-value");
+                    ratingInput.value = value;
+
+                    // Remove previous styles
+                    teeth.forEach(t => {
+                        t.classList.remove("text-warning", "shake");
+                    });
+
+                    // Apply shake and color to selected teeth
+                    for (let i = 0; i < value; i++) {
+                        teeth[i].classList.add("text-warning", "shake");
+
+                        // Remove shake effect after animation completes
+                        setTimeout(() => {
+                            teeth[i].classList.remove("shake");
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function ($) {
+            if ($.fn.owlCarousel) {
+                $(".feedback-carousel").owlCarousel({
+                    loop: true,
+                    margin: 20,
+                    nav: false,
+                    dots: true,
+                    autoplay: true,
+                    autoplayTimeout: 3500,
+                    autoplayHoverPause: true,
+                    smartSpeed: 1000,  // Slower speed for smoothness
+                    autoplaySpeed: 1000,
+                    dotsSpeed: 800,
+                    animateOut: 'fadeOutUp',
+                    animateIn: 'fadeInDown',  // Bounces in// Bounces in  // Soft fade-in effect , // Slide in from the left
+                    responsive: {
+                        0: { items: 1 },
+                        768: { items: 2 },
+                        1024: { items: 3 }
+                    }
+                });
+            } else {
+                console.error("Owl Carousel plugin is not loaded!");
+            }
+        });
+
+
+    </script>
+
+}

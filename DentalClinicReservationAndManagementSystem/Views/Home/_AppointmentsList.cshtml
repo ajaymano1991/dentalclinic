@@ -1,0 +1,32 @@
+﻿
+@model List<DentalClinicReservationAndManagementSystem.Models.Appointment>
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4>Appointments</h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model)
+                {
+                    <tr>
+                        <td>@appointment.PatientName</td>
+                        <td>@appointment.PhoneNumber</td>
+                        <td>@appointment.ReasonForAppointment</td>
+                        <td>@appointment.PreferredDateTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

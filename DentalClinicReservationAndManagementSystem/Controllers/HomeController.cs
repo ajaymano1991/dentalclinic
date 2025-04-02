@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
@@ -15,14 +16,17 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         DentalClinicEntities db = new DentalClinicEntities();
         public ActionResult Index()
         {
-            var mvcName = typeof(Controller).Assembly.GetName();
-            var isMono = Type.GetType("Mono.Runtime") != null;
-
-            ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
-            ViewData["Runtime"] = isMono ? "Mono" : ".NET";
-
-
             List<Dentist> dentistList1 = db.Dentists.ToList();
+            List<Appointment> todaysAppointments = db.Appointments.ToList() 
+                                                   .Where(x => x.PreferredDateTime.Date == DateTime.Now.Date)
+                                                   .ToList();
+            var dentalNews = db.DentalNews.ToList()
+                           .Where(n => n.IsActive)
+                           .ToList();
+
+            List<FeedBack> dentalFeedBackList = db.FeedBacks.ToList();
+                          
+
             List<Dentist> dentistList = new List<Dentist>();
             foreach (var dentist in dentistList1)
             {
@@ -32,7 +36,12 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                 }
 
             }
+
+            // Store data in ViewBag
+            ViewBag.DentalNews = dentalNews;
             ViewBag.dentistList = dentistList;
+            ViewBag.feedBack = dentalFeedBackList;
+            ViewBag.TodaysAppointments = todaysAppointments;
             return View();
         }
         public ActionResult About()
@@ -250,19 +259,9 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
         public ActionResult AppointmentList()
         {
-
-            List<Appointment> appointmentList1 = db.Appointments.ToList();
-            List<Appointment> appointmentList = new List<Appointment>();
-            string s = Session["LoggedDentistID"].ToString();
-            int n = Convert.ToInt32(s);
-            foreach (var appointment in appointmentList1)
-            {
-                //if (appointment.DatientId == n)
-                //{
-                    appointmentList.Add(appointment);
-                //}
-
-            }
+            List<Appointment> appointmentList = db.Appointments.ToList();
+            //string s = Session["LoggedDentistID"].ToString();
+            //int n = Convert.ToInt32(s);
             ViewBag.appointmentList = appointmentList;
             return View();
         }
@@ -310,7 +309,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                 if (appointments.Count>0)
                 {
                     ViewBag.Message2 = "Time slot is not available";
-                    return View("TakeAppointment", appointment);
+                    return View("Index", appointment);
                 }
                 else
                 {
@@ -339,7 +338,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                         }
                         throw;
                     }
-                    return RedirectToAction("PatientPanel");
+                    return RedirectToAction("Index");
                 }
             }
             return View();
@@ -363,6 +362,62 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             ViewBag.fList = fList;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult subscription(string email, string phoneNumber)
+        {
+            var subscribied = db.subscriptions.AsEnumerable()
+                                     .Where(a => a.Email == email && a.PhoneNumber == phoneNumber).FirstOrDefault();
+
+
+            if (subscribied != null)
+            {
+                ViewBag.Message2 = "Already subscribied";
+                return View("Index");
+            }
+            else
+            {
+                var newsubscription = new subscription()
+                {
+                    Email = email,
+                    PhoneNumber=phoneNumber
+                };
+
+                db.subscriptions.Add(newsubscription);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public ActionResult SubmitFeedback(string PatientName, string FeedbackText, int Rating)
+        {
+            
+                var newFeedback = new FeedBack()
+                {
+                    PatientName = PatientName,
+                    FeedbackText = FeedbackText,
+                    Rating = Rating,
+                    CreatedAt = DateTime.Now
+                };
+
+                db.FeedBacks.Add(newFeedback);
+                db.SaveChanges();
+
+                ViewBag.Message2 = "Thank you for your feedback!";
+              return RedirectToAction("Index");
+
+        }
+
+        public ActionResult Dashboard()
+        {
+            var patientCount = db.Appointments.Count();
+            var appointmentCount = db.Appointments.Count();
+
+            ViewBag.PatientCount = patientCount;
+            ViewBag.AppointmentCount = appointmentCount;
+            return View();
+        }
+
 
     }
 }

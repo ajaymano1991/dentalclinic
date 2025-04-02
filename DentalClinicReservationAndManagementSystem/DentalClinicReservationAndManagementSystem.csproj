@@ -154,7 +154,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Dental.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DentalNew.cs">
+      <DependentUpon>Dental.tt</DependentUpon>
+    </Compile>
     <Compile Include="Dentist.cs">
+      <DependentUpon>Dental.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FeedBack.cs">
       <DependentUpon>Dental.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -176,10 +182,14 @@
     <Compile Include="Models\PrescriptionModel.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\subscription.cs" />
     <Compile Include="PatientRegister.cs">
       <DependentUpon>Dental.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="subscription.cs">
+      <DependentUpon>Dental.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DentalCareDB.mdf" />
@@ -221,15 +231,26 @@
     <Content Include="Content\fonts\open-iconic\open-iconic.svg" />
     <Content Include="Content\images\about-2.jpg" />
     <Content Include="Content\images\about.jpg" />
+    <Content Include="Content\images\achivement.jpeg" />
     <Content Include="Content\images\angular.png" />
     <Content Include="Content\images\apple-icon.png" />
-    <Content Include="Content\images\bg_1.jpeg" />
+    <Content Include="Content\images\bg_1.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\bg_1.jpg" />
-    <Content Include="Content\images\bg_2.jpeg" />
+    <Content Include="Content\images\bg_2.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\bg_2.jpg" />
-    <Content Include="Content\images\bg_3.jpeg" />
+    <Content Include="Content\images\bg_3.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\bg_3.jpg" />
     <Content Include="Content\images\cover.jpg" />
+    <Content Include="Content\images\display_1.jpg" />
+    <Content Include="Content\images\display_2.jpg" />
+    <Content Include="Content\images\display_3.jpg" />
+    <Content Include="Content\images\display_5.jpg" />
     <Content Include="Content\images\ex1.png" />
     <Content Include="Content\images\ex2.png" />
     <Content Include="Content\images\ex3.png" />
@@ -267,6 +288,18 @@
     <Content Include="Content\images\person_6.jpg" />
     <Content Include="Content\images\person_7.jpg" />
     <Content Include="Content\images\person_8.jpg" />
+    <Content Include="Content\images\profile-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\Profile-2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\Profile-3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\Profile-4.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\react.png" />
     <Content Include="Content\images\sidebar-1.jpg" />
     <Content Include="Content\images\sidebar-2.jpg" />
@@ -276,6 +309,7 @@
     <Content Include="Content\images\vue.png" />
     <Content Include="Content\images\logo2.jpeg" />
     <Content Include="Content\images\logo5.jpeg" />
+    <Content Include="Content\images\welcome.jpg" />
     <Content Include="Content\js\aos.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -332,7 +366,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\.DS_Store" />
+    <Content Include="Content\.DS_Store">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\css\.DS_Store" />
     <Content Include="Content\css\bootstrap\.DS_Store" />
     <Content Include="Content\css\css\.DS_Store" />
@@ -356,7 +392,9 @@
     <Content Include="Content\fonts\open-iconic\open-iconic.otf" />
     <Content Include="Content\fonts\open-iconic\open-iconic.ttf" />
     <Content Include="Content\fonts\open-iconic\open-iconic.woff" />
-    <Content Include="Content\images\.DS_Store" />
+    <Content Include="Content\images\.DS_Store">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\js\.DS_Store" />
     <Content Include="Content\scss\.DS_Store" />
     <Content Include="Content\scss\bootstrap\bootstrap-grid.scss" />
@@ -657,6 +695,8 @@
     <Content Include="Views\Home\MyAppointments.cshtml" />
     <Content Include="Views\Home\SeeAppointments.cshtml" />
     <Content Include="Views\Home\CreatePrescription.cshtml" />
+    <Content Include="Views\Home\_AppointmentsList.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
