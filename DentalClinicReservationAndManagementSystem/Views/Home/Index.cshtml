@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
     .transparent-input {
@@ -345,924 +347,976 @@
             <h2 class="fw-bold text-white text-uppercase">Appointment</h2>
             <p class="text-light">Book your visit or get updates – all in one place.</p>
         </div>
-                <div class="row no-gutters">
-                    <div class="col-md-3 d-flex align-items-stretch">
-                        <div class="dental-news-container">
-                            <h2 class="news-heading">😊 Bright Smiles, Happy Lives!</h2>
+        <div class="row no-gutters">
+            <div class="col-md-3 d-flex align-items-stretch">
+                <div class="dental-news-container">
+                    <h2 class="news-heading">😊 Bright Smiles, Happy Lives!</h2>
 
-                            @if (ViewBag.DentalNews != null && ViewBag.DentalNews.Count > 0)
-                            {
-                                <div class="scroll-container">
-                                    <ul class="scroll-content">
-                                        @foreach (var news in ViewBag.DentalNews)
-                                        {
-                                            <li><h6>@news.Description</h6></li>
-                                        }
-
-                                    </ul>
-                                </div>
-                            }
-                            else
-                            {
-                                <p class="no-news">No dental news available.</p>
-                            }
-                        </div>
-
-                    </div>
-                    <div class="col-md-6 d-flex align-items-stretch ">
-                        <div class="consultation consul w-100 px-4 px-md-5">
-                            <div class="text-center">
-                                <h3 class="mb-4">Make An Appoinment</h3>
-                            </div>
-                            @model DentalClinicReservationAndManagementSystem.Models.Appointment
-                            @using DentalClinicReservationAndManagementSystem.Models
-                            @using (Html.BeginForm("TakeAppointment", "Home", FormMethod.Post, new { @class = "appointment-form well well-lg" }))
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <div class="row">
-                                    <!-- Patient Name -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Full Name</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                @Html.TextBoxFor(model => model.PatientName, new { @class = "form-control", @placeholder = "Enter your full name", required = "required" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Phone Number -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Mobile Number</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = "Enter your phone number", required = "required" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Email</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Enter your email", required = "required" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Reason for Appointment -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Reason for Appointment</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                                @Html.DropDownListFor(model => model.ReasonForAppointment, new SelectList(new[]
-                                                {
-                                                    "ROUTINE DENTAL CHECKUP",
-                                                    "ROOT CANAL THERAPY",
-                                                    "DENTAL EXTRACTION AND IMPACTION",
-                                                    "CROWNS AND BRIDGE",
-                                                    "DENTURES",
-                                                    "DENTAL IMPLANTS",
-                                                    "DIGITAL SMILE DESIGNING",
-                                                    "FULL MOUTH REHABILITATION",
-                                                    "GUM DISEASE TREATMENT",
-                                                    "LASER TREATMENT",
-                                                    "ORTHODONTIC – BRACES",
-                                                    "CLEAR ALIGNERS",
-                                                    "PEDIATRIC DENTISTRY",
-                                                    "OTHERS"
-                                                }), "Select a reason", new { @class = "form-control", required = "required", style = "color: black;" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Preferred Date & Time -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Preferred Date & Time</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                @Html.TextBoxFor(model => model.PreferredDateTime, new { @class = "form-control", @type = "datetime-local", required = "required" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Submit Button -->
-                                    <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-primary btn-lg">
-                                            <i class="glyphicon glyphicon-check"></i> Make Appointment
-                                        </button>
-                                    </div>
-                                </div>
-                            }
-
-                        </div>
-                    </div>
-                    <div class="col-md-3 d-flex align-items-stretch">
-                        <div class="consultation w-100 text-center px-4 px-md-5">
-                            <h3 class="mb-4">Today's Appointments</h3>
-                            <p></p>
-                            <div>
-                                @if (ViewBag.TodaysAppointments != null && ViewBag.TodaysAppointments.Count > 0)
+                    @if (ViewBag.DentalNews != null && ViewBag.DentalNews.Count > 0)
+                    {
+                        <div class="scroll-container">
+                            <ul class="scroll-content">
+                                @foreach (var news in ViewBag.DentalNews)
                                 {
-                                    <div class="scroll-container">
-                                        <ul class="scroll-content">
-                                            @foreach (var appointment in ViewBag.TodaysAppointments)
-                                            {
-                                                <li><h3>@appointment.PreferredDateTime.ToString("yyyy-MM-dd HH:mm")</h3></li>
-                                            }
-                                        </ul>
+                                    <li><h6>@news.Description</h6></li>
+                                }
+
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="no-news">No dental news available.</p>
+                    }
+                </div>
+
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch ">
+                <div class="consultation consul w-100 px-4 px-md-5">
+                    <div class="text-center">
+                        <h3 class="mb-4">Make An Appoinment</h3>
+                    </div>
+                    @model DentalClinicReservationAndManagementSystem.Models.Appointment
+                    @using DentalClinicReservationAndManagementSystem.Models
+                    @using (Html.BeginForm("TakeAppointment", "Home", FormMethod.Post, new { @class = "appointment-form well well-lg" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <!-- Patient Name -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Full Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        @Html.TextBoxFor(model => model.PatientName, new { @class = "form-control", @placeholder = "Enter your full name", required = "required" })
                                     </div>
-                                }
-                                else
-                                {
-                                    <p>No appointments for today.</p>
-                                }
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="ftco-section ftco-services" id="Service-Section">
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-5">
-                    <div class="col-md-7 text-center heading-section ftco-animate">
-                        <h2 class="mb-2 text-primary">Enhancing Your Smile, One Step at a Time</h2>
-                        <p class="text-muted">Experience professional dental care with cutting-edge treatments designed to keep your smile healthy and bright.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- Teeth Whitening -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-tooth text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Teeth Whitening</h3>
-                                <p>Brighten your smile with our professional teeth whitening treatments, designed to remove stains and enhance your confidence.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Teeth Cleaning -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-dental-care text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Teeth Cleaning</h3>
-                                <p>Prevent cavities and gum disease with our thorough cleaning services, leaving your teeth refreshed and healthier.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Quality Brackets -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-tooth-with-braces text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Quality Brackets</h3>
-                                <p>Strong, reliable, and comfortable brackets to support your orthodontic journey towards a straighter smile.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modern Anesthetic -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-anesthesia text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Modern Anesthetic</h3>
-                                <p>Experience pain-free treatments with the latest anesthetic technology for maximum comfort and safety.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Dental Calculus -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-dental-care text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Dental Calculus</h3>
-                                <p>Eliminate tartar buildup and protect your gums with our professional calculus removal service.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Paradontosis -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-bacteria text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Paradontosis</h3>
-                                <p>Combat gum disease with our expert periodontal treatments, promoting strong gums and lasting oral health.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Dental Implants -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-dentist text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Dental Implants</h3>
-                                <p>Restore your smile with natural-looking dental implants for a permanent and comfortable tooth replacement.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tooth Braces -->
-                    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                        <div class="media block-6 services d-block text-center shadow-lg p-4 rounded">
-                            <div class="icon d-flex justify-content-center align-items-center bg-light rounded-circle">
-                                <span class="flaticon-dental-care-1 text-primary"></span>
-                            </div>
-                            <div class="media-body mt-3">
-                                <h3 class="heading">Tooth Braces</h3>
-                                <p>Achieve perfectly aligned teeth with our advanced braces, designed for comfort and efficiency.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="ftco-section" id="About-Section" style="background: linear-gradient(to bottom, #f8f9fa, #e9ecef); padding: 60px 0;">
-            <div class="container">
-                <!-- Section Heading -->
-                <div class="row justify-content-center mb-4">
-                    <div class="col-md-8 text-center">
-                        <h2 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: #333; text-transform: uppercase; letter-spacing: 1px;">About Us</h2>
-                    </div>
-                </div>
-
-                <!-- First Set -->
-                <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
-                    <div class="col-md-4 ftco-animate img about-image" style="background-image: url('../../content/images/bg_1.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
-                    <div class="col-md-8 ftco-animate pr-md-5" style="padding: 20px;">
-                        <h2 class="mb-4" style="color: #007bff; font-weight: bold;">We Offer High-Quality Services</h2>
-                        <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">Krishna Dental Clinic and Implant Centre was established in 2025 with a vision of providing high-quality dental care.</p>
-                    </div>
-                </div>
-
-                <!-- Second Set -->
-                <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
-                    <div class="col-md-4 ftco-animate img about-image order-md-last" style="background-image: url('../../content/images/welcome.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
-                    <div class="col-md-8 ftco-animate pr-md-5 order-md-first" style="padding: 20px;">
-                        <h2 class="mb-4" style="color: #007bff; font-weight: bold;">To Accommodate All Patients</h2>
-                        <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">At Krishna Dental Clinic and Implant Centre, we combine a skilled and friendly team with a welcoming environment to ensure a comfortable experience for our patients. Our personalized approach is designed to deliver the exceptional care they deserve.</p>
-                    </div>
-                </div>
-
-                <!-- Third Set -->
-                <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
-                    <div class="col-md-4 ftco-animate img about-image" style="background-image: url('../../content/images/bg_3.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
-                    <div class="col-md-8 ftco-animate pr-md-5" style="padding: 20px;">
-                        <h2 class="mb-4" style="color: #007bff; font-weight: bold;">Help Our Customers' Needs</h2>
-                        <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">With advanced treatments, cutting-edge technology, and affordable pricing, we are committed to bringing world-class dental services to the people of Pondicherry. Our clinic is equipped with state-of-the-art dental equipment featuring multi-positional functionality, ensuring maximum comfort for our patients.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contactus-section" class="ftco-section py-5 bg-light">
-            <div class="container">
-                <!-- Section Title -->
-                <div class="row justify-content-center pb-4">
-                    <div class="col-md-8 text-center">
-                        <h2 class="mb-3 fw-bold text-uppercase">Get in Touch</h2>
-                        <p class="text-muted">We are here to help. Contact us for appointments, queries, or any assistance.</p>
-                    </div>
-                </div>
-
-                <!-- Contact Sections -->
-                <div class="row row-cols-1 row-cols-md-2 g-4 align-items-stretch">
-                    <!-- Google Map Section -->
-                    <div class="col">
-                        <div id="googleMap" class="w-100 h-100 rounded shadow-sm"
-                             style="min-height: 450px; background: #e9ecef;">
-                            <!-- Replace with an embedded Google Map iframe -->
-                            <iframe class="rounded w-100 h-100"
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.9795231183973!2d79.83210127489999!3d11.930506488286642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5361d3d5c3b6cf%3A0x3f9c826d3d7c3b0f!2sPondicherry!5e0!3m2!1sen!2sin!4v1617488411860!5m2!1sen!2sin"
-                                    style="border:0;" allowfullscreen="" loading="lazy">
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <!-- Contact Info Section -->
-                    <div class="col-lg-6 col-md-12 d-flex align-items-stretch">
-                        <div class="w-100 p-4 bg-white rounded shadow-lg">
-                            <h3 class="mb-4 text-center text-primary fw-bold">Our Clinic Information</h3>
-
-                            <!-- Location -->
-                            <div class="d-flex align-items-center mb-3">
-
-                                <div>
-                                    <strong><i class="fa-solid fa-location-dot text-danger fs-3 me-3" style="width: 30px; text-align: center;"></i>Location</strong>
-                                    <p class="mb-0 ml-5 text-muted">NO.130, Kamaraj Salai, Puducherry - 605013</p>
                                 </div>
                             </div>
 
-                            <!-- Call Us -->
-                            <div class="d-flex align-items-center mb-3">
-                                <div>
-                                    <strong>
-                                        <i class="fa-solid fa-phone text-success fs-3 me-3" style="width: 30px; text-align: center;"></i>
-                                        Call Us
-                                    </strong>
-                                    <p class="mb-0 ml-5 text-muted">+91-9190144066<br>+91-8778653142</p>
+                            <!-- Phone Number -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Mobile Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = "Enter your phone number", required = "required" })
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Email -->
-                            <div class="d-flex align-items-center mb-3">
-                                <div>
-                                    <strong>
-                                        <i class="fa-solid fa-envelope text-primary fs-3 me-3" style="width: 30px; text-align: center;"></i>
-                                        Email
-                                    </strong>
-                                    <p class="mb-0 ml-5 text-muted">krishnadentalclinic25@gmail.com</p>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Enter your email", required = "required" })
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Working Hours -->
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <strong>
-                                        <i class="fa-solid fa-clock text-warning fs-3 me-3" style="width: 30px; text-align: center;"></i>
-                                        Working Hours
-                                    </strong>
-                                    <p class="mb-0 ml-5 text-muted">Morning: 9:30 AM - 1:30 PM IST<br>Evening: 4:30 PM - 9:30 PM IST</p>
+                            <!-- Reason for Appointment -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Reason for Appointment</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                        @Html.DropDownListFor(model => model.ReasonForAppointment, new SelectList(new[]
+                                        {
+                                            "ROUTINE DENTAL CHECKUP",
+                                            "ROOT CANAL THERAPY",
+                                            "DENTAL EXTRACTION AND IMPACTION",
+                                            "CROWNS AND BRIDGE",
+                                            "DENTURES",
+                                            "DENTAL IMPLANTS",
+                                            "DIGITAL SMILE DESIGNING",
+                                            "FULL MOUTH REHABILITATION",
+                                            "GUM DISEASE TREATMENT",
+                                            "LASER TREATMENT",
+                                            "ORTHODONTIC – BRACES",
+                                            "CLEAR ALIGNERS",
+                                            "PEDIATRIC DENTISTRY",
+                                            "OTHERS"
+                                        }), "Select a reason", new { @class = "form-control", required = "required", style = "color: black;" })
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
+                            <!-- Preferred Date & Time -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Preferred Date & Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                        @Html.TextBoxFor(model => model.PreferredDateTime, new { @class = "form-control", @type = "datetime-local", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="glyphicon glyphicon-check"></i> Make Appointment
+                                </button>
+                            </div>
+                        </div>
+                    }
 
                 </div>
             </div>
-        </section>
-
-
-
-        <section id="Doctors-Section" class="ftco-section bg-light py-5">
-            <div class="container">
-                <div class="row justify-content-center mb-5">
-                    <div class="col-md-8 text-center heading-section ftco-animate">
-                        <h2 class="mb-4 text-uppercase font-weight-bold">Our Qualified Doctors</h2>
-                        <p class="text-muted">Meet our experienced dental specialists who ensure high-quality dental care.</p>
-                    </div>
-                </div>
-
-                <div class="row justify-content-center">
-                    <!-- Doctor 1 -->
-                    <div class="col-md-6 col-lg-2 text-center ftco-animate">
-                        <div class="staff" data-toggle="modal" data-target="#doctorModal"
-                             data-name="Dr.K.Vignesh"
-                             data-position="Chief Dental Surgeon, Periodontist, Implantologist & Laser Specialist"
-                             data-image="/Content/images/Profile-1.jpg"
-                             data-description="Dr. K. Vignesh is a specialist in dental surgery, implants, and laser treatment.">
-                            <div class="img-wrap mx-auto headfix">
-                                <img src="/Content/images/Profile-1.jpg" class="img-fluid">
+            <div class="col-md-3 d-flex align-items-stretch">
+                <div class="consultation w-100 text-center px-4 px-md-5">
+                    <h3 class="mb-4">Today's Appointments</h3>
+                    <p></p>
+                    <div>
+                        @if (ViewBag.TodaysAppointments != null && ViewBag.TodaysAppointments.Count > 0)
+                        {
+                            <div class="scroll-container">
+                                <ul class="scroll-content">
+                                    @foreach (var appointment in ViewBag.TodaysAppointments)
+                                    {
+                                        <li><h3>@appointment.PreferredDateTime.ToString("yyyy-MM-dd HH:mm")</h3></li>
+                                    }
+                                </ul>
                             </div>
-                            <h4 class="mt-3">Dr.K.Vignesh</h4>
-                            <p class="text-muted small">Chief Dental Surgeon</p>
-                        </div>
+                        }
+                        else
+                        {
+                            <p>No appointments for today.</p>
+                        }
                     </div>
 
-                    <!-- Doctor 2 -->
-                    <div class="col-md-6 col-lg-2 text-center ftco-animate">
-                        <div class="staff" data-toggle="modal" data-target="#doctorModal"
-                             data-name="Dr.I.Ragul"
-                             data-position="Consultant Prosthodontist & Implantologist"
-                             data-image="/Content/images/profile-2.jpg">
-                            <div class="img-wrap mx-auto">
-                                <img src="/Content/images/profile-2.jpg" class="img-fluid">
-                            </div>
-                            <h4 class="mt-3">Dr.I.Ragul</h4>
-                            <p class="text-muted small">Prosthodontist & Implantologist</p>
-                        </div>
-                    </div>
-
-                    <!-- Doctor 3 -->
-                    <div class="col-md-6 col-lg-2 text-center ftco-animate">
-                        <div class="staff" data-toggle="modal" data-target="#doctorModal"
-                             data-name="Dr.Ramya Raja"
-                             data-position="Consultant Pediatric Dentist"
-                             data-image="/Content/images/profile-3.jpg">
-                            <div class="img-wrap mx-auto headfix">
-                                <img src="/Content/images/profile-3.jpg" class="img-fluid">
-                            </div>
-                            <h4 class="mt-3">Dr.Ramya Raja</h4>
-                            <p class="text-muted small">Pediatric Dentist</p>
-                        </div>
-                    </div>
-
-                    <!-- Doctor 4 -->
-                    <div class="col-md-6 col-lg-2 text-center ftco-animate">
-                        <div class="staff" data-toggle="modal" data-target="#doctorModal"
-                             data-name="Dr.Alicia Henderson"
-                             data-position="Senior Orthodontist"
-                             data-image="/Content/images/profile-4.jpg">
-                            <div class="img-wrap mx-auto headfix">
-                                <img src="/Content/images/profile-4.jpg" class="img-fluid">
-                            </div>
-                            <h4 class="mt-3">Dr.Alicia Henderson</h4>
-                            <p class="text-muted small">Senior Orthodontist</p>
-                        </div>
-                    </div>
-
-                    <!-- Doctor 5 -->
-                    <div class="col-md-6 col-lg-2 text-center ftco-animate">
-                        <div class="staff" data-toggle="modal" data-target="#doctorModal"
-                             data-name="Dr. Rahul Chaurasia"
-                             data-position="Consultant Root Canal Specialist"
-                             data-image="/Content/images/person_8.jpg">
-                            <div class="img-wrap mx-auto headfix">
-                                <img src="/Content/images/person_8.jpg" class="img-fluid">
-                            </div>
-                            <h4 class="mt-3">Dr. Rahul Chaurasia</h4>
-                            <p class="text-muted small">Root Canal Specialist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <style>
-            /* Section Background */
-            #Doctors-Section {
-                background-color: #f8f9fa;
-            }
-
-            /* Image Wrapper - Circular */
-            .img-wrap {
-                width: 120px;
-                height: 120px;
-                border-radius: 50%;
-                overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #fff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease-in-out;
-            }
-
-                /* Doctor Image */
-                .img-wrap img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover; /* Ensures image fully fills the circle */
-                    transition: all 0.3s ease-in-out;
-                }
-
-            .headfix img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center top; /* Focus on upper part (head) */
-                transition: all 0.3s ease-in-out;
-            }
-            /* Hover Effect */
-
-            .img-wrap:hover {
-                width: 150px; /* Slightly wider */
-                height: 150px; /* Taller for better visibility */
-                border-radius: 10px; /* Change to rounded rectangle */
-            }
-
-                .img-wrap:hover img {
-                    object-fit: cover;
-                    object-position: top center; /* Keeps head properly positioned */
-                    transform: scale(1.0);
-                }
-            /* Doctor Name */
-            .staff h4 {
-                font-size: 1.1rem;
-                font-weight: bold;
-                color: #333;
-            }
-
-            /* Doctor Title */
-            .staff p {
-                font-size: 0.9rem;
-            }
-
-            /* Responsive Layout */
-            @@media (max-width: 768px) {
-                .img-wrap {
-                    width: 100px;
-                    height: 100px;
-                }
-
-                .staff h4 {
-                    font-size: 1rem;
-                }
-            }
-        </style>
-
-
-        <!-- Doctor Details Modal -->
-        <div class="modal fade" id="doctorModal" tabindex="-1" role="dialog" aria-labelledby="doctorModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="doctorName">Doctor Name</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img id="doctorImage" src="" class="img-fluid mb-3" style="max-width: 100%; border-radius: 10px;">
-                        <h5 id="doctorPosition"></h5>
-                        <p id="doctorDescription"></p>
-                    </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-        @*<section class="ftco-section ftco-counter" id="section-counter" style="background-image: url(/Content/images/achivement.jpeg);">
-                <div class="container">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-md-3 aside-stretch py-5">
-                            <div class=" heading-section heading-section-white ftco-animate pr-md-4">
-                                <h2 style="color:black">Achievements</h2>
-                            </div>
-                        </div>
-                        <div class="col-md-9 py-5 pl-md-5">
-                            <div class="row">
-                                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                                    <div class="block-18">
-                                        <div class="text">
-                                            <strong class="number" data-number="14">0</strong>
-                                            <span>Years of Experience</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                                    <div class="block-18">
-                                        <div class="text">
-                                            <strong class="number" data-number="4500">0</strong>
-                                            <span>Qualified Dentist</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                                    <div class="block-18">
-                                        <div class="text">
-                                            <strong class="number" data-number="4200">0</strong>
-                                            <span>Happy Smiling Customer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-                                    <div class="block-18">
-                                        <div class="text">
-                                            <strong class="number" data-number="320">0</strong>
-                                            <span>Patients Per Year</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>*@
-
-
-        <section class="ftco-section testimony-section bg-light">
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-2">
-                    <div class="col-md-8 text-center heading-section">
-                        <span class="subheading">Testimonials</span>
-                        <h2 class="mb-4">Our Patients Say About Us</h2>
-                    </div>
-                </div>
-
-                <div class="owl-carousel feedback-carousel">
-                    @foreach (var feedback in ViewBag.feedBack)
-                    {
-                        <div class="item">
-                            <div class="testimony-wrap d-flex">
-                                <div class="user-img">
-                                </div>
-                                <div class="text pl-4 bg-light">
-                                    <span class="quote d-flex align-items-center justify-content-center">
-                                        <i class="icon-quote-left"></i>
-                                    </span>
-                                    <p>@feedback.FeedbackText</p>
-                                    <p class="name">@feedback.PatientName</p>
-                                    <span class="position">
-                                        @for (int i = 0; i < feedback.Rating; i++)
-                                        {
-                                            <i class="fa-solid fa-tooth text-warning"></i> <!-- Teeth Rating -->
-                                        }
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-
+    </div>
+</section>
+<section class="ftco-section ftco-services" id="Service-Section">
+    <div class="container">
+        <div class="row justify-content-center  pb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <h2 class="mb-2 text-primary">Enhancing Your Smile, One Step at a Time</h2>
+                <p class="text-muted">Experience professional dental care with cutting-edge treatments designed to keep your smile healthy and bright.</p>
             </div>
-        </section>
-        @*<section class="ftco-gallery">
-                <div class="container-wrap">
-                    <div class="row no-gutters">
-                        <div class="col-md-3 ftco-animate">
-                            <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-1.jpg);">
-                                <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                    <span class="icon-search"></span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 ftco-animate">
-                            <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-2.jpg);">
-                                <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                    <span class="icon-search"></span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 ftco-animate">
-                            <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-3.jpg);">
-                                <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                    <span class="icon-search"></span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 ftco-animate">
-                            <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-4.jpg);">
-                                <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                    <span class="icon-search"></span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+        </div>
+        <div class="row col-12">
+            <img src="~/Content/images/Services List.png" class="img-fluid" alt="Dental Services" style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="ftco-section" id="About-Section" style="background: linear-gradient(to bottom, #f8f9fa, #e9ecef); padding: 60px 0;">
+    <div class="container">
+        <!-- Section Heading -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: #333; text-transform: uppercase; letter-spacing: 1px;">About Us</h2>
+            </div>
+        </div>
+
+        <!-- First Set -->
+        <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
+            <div class="col-md-4 ftco-animate img about-image" style="background-image: url('../../content/images/bg_1.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
+            <div class="col-md-8 ftco-animate pr-md-5" style="padding: 20px;">
+                <h2 class="mb-4" style="color: #007bff; font-weight: bold;">We Offer High-Quality Services</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">Krishna Dental Clinic and Implant Centre was established in 2025 with a vision of providing high-quality dental care.</p>
+            </div>
+        </div>
+
+        <!-- Second Set -->
+        <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
+            <div class="col-md-4 ftco-animate img about-image order-md-last" style="background-image: url('../../content/images/welcome.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
+            <div class="col-md-8 ftco-animate pr-md-5 order-md-first" style="padding: 20px;">
+                <h2 class="mb-4" style="color: #007bff; font-weight: bold;">To Accommodate All Patients</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">At Krishna Dental Clinic and Implant Centre, we combine a skilled and friendly team with a welcoming environment to ensure a comfortable experience for our patients. Our personalized approach is designed to deliver the exceptional care they deserve.</p>
+            </div>
+        </div>
+
+        <!-- Third Set -->
+        <div class="row d-md-flex align-items-center" style="margin-bottom: 40px;">
+            <div class="col-md-4 ftco-animate img about-image" style="background-image: url('../../content/images/bg_3.jpg'); background-size: cover; background-position: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); min-height: 250px;"></div>
+            <div class="col-md-8 ftco-animate pr-md-5" style="padding: 20px;">
+                <h2 class="mb-4" style="color: #007bff; font-weight: bold;">Help Our Customers' Needs</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">With advanced treatments, cutting-edge technology, and affordable pricing, we are committed to bringing world-class dental services to the people of Pondicherry. Our clinic is equipped with state-of-the-art dental equipment featuring multi-positional functionality, ensuring maximum comfort for our patients.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contactus-section" class="ftco-section py-5 bg-light">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="row justify-content-center pb-4">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-3 fw-bold text-uppercase">Get in Touch</h2>
+                <p class="text-muted">We are here to help. Contact us for appointments, queries, or any assistance.</p>
+            </div>
+        </div>
+
+        <!-- Contact Sections -->
+        <div class="row row-cols-1 row-cols-md-2 g-4 align-items-stretch">
+            <!-- Google Map Section -->
+            <div class="col">
+                <div id="googleMap" class="w-100 h-100 rounded shadow-sm"
+                     style="min-height: 450px; background: #e9ecef;">
+                    <!-- Replace with an embedded Google Map iframe -->
+                    <iframe class="rounded w-100 h-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.9795231183973!2d79.83210127489999!3d11.930506488286642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5361d3d5c3b6cf%3A0x3f9c826d3d7c3b0f!2sPondicherry!5e0!3m2!1sen!2sin!4v1617488411860!5m2!1sen!2sin"
+                            style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
                 </div>
-            </section>*@
+            </div>
 
+            <!-- Contact Info Section -->
+            <div class="col-lg-6 col-md-12 d-flex align-items-stretch">
+                <div class="w-100 p-4 bg-white rounded shadow-lg">
+                    <h3 class="mb-4 text-center text-primary fw-bold">Our Clinic Information</h3>
 
-        <div id="map"></div>
-        <footer class="ftco-footer ftco-bg-dark ftco-section py-5 text-light">
-            <div class="container">
-                <div class="row g-4 text-center text-md-left">
+                    <!-- Location -->
+                    <div class="d-flex align-items-center mb-3">
 
-                    <!-- Clinic Info -->
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="ftco-footer-widget">
-                            <h2 class="ftco-heading-2 text-uppercase mb-3">Krishna Dental Clinic</h2>
-                            <p>Established in 2025, Krishna Dental Clinic aims to provide high-quality dental care with advanced technology.</p>
-                            <ul class="ftco-footer-social list-unstyled d-flex justify-content-center justify-content-md-start">
-                                <li class="mx-2"><a href="#"><i class="fab fa-twitter fa-lg text-primary"></i></a></li>
-                                <li class="mx-2"><a href="#"><i class="fab fa-facebook-f fa-lg text-primary"></i></a></li>
-                                <li class="mx-2"><a href="https://www.instagram.com/krishnadent" target="_blank"><i class="fab fa-instagram fa-lg text-danger"></i></a></li>
-                            </ul>
+                        <div>
+                            <strong><i class="fa-solid fa-location-dot text-danger fs-3 me-3" style="width: 30px; text-align: center;"></i>Location</strong>
+                            <p class="mb-0 ml-5 text-muted">NO.130, Kamaraj Salai, Puducherry - 605013</p>
                         </div>
                     </div>
 
-                    <!-- Quick Links -->
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="ftco-footer-widget">
-                            <h2 class="ftco-heading-2 text-uppercase mb-3">Quick Links</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#About-Section" class="d-block py-1 text-light">About</a></li>
-                                <li><a href="#Service-Section" class="d-block py-1 text-light">Services</a></li>
-                                <li><a href="#Doctors-Section" class="d-block py-1 text-light">Dentists</a></li>
-                                <li><a href="#appointment-section" class="d-block py-1 text-light">Make Appointment</a></li>
-                                <li><a href="#contactus-section" class="d-block py-1 text-light">Contact</a></li>
-                            </ul>
+                    <!-- Call Us -->
+                    <div class="d-flex align-items-center mb-3">
+                        <div>
+                            <strong>
+                                <i class="fa-solid fa-phone text-success fs-3 me-3" style="width: 30px; text-align: center;"></i>
+                                Call Us
+                            </strong>
+                            <p class="mb-0 ml-5 text-muted">+91-9190144066<br>+91-8778653142</p>
                         </div>
                     </div>
 
-                    <!-- Subscription Form -->
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="ftco-footer-widget">
-                            <h2 class="ftco-heading-2 text-uppercase mb-3">Subscribe</h2>
-                            <form action="@Url.Action("subscription", "Home")" method="post" class="subscribe-form">
-                                @Html.AntiForgeryToken()
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control mb-2 text-center rounded-pill" placeholder="Enter email" required>
-                                    <input type="tel" name="phoneNumber" class="form-control mb-2 text-center rounded-pill"
-                                           placeholder="Enter phone number" maxlength="10"
-                                           pattern="[6789][0-9]{9}" title="Phone must start with 6-9 and be 10 digits"
-                                           required>
-                                    <button type="submit" class="btn btn-success w-100 rounded-pill">Subscribe</button>
-                                </div>
-                            </form>
+                    <!-- Email -->
+                    <div class="d-flex align-items-center mb-3">
+                        <div>
+                            <strong>
+                                <i class="fa-solid fa-envelope text-primary fs-3 me-3" style="width: 30px; text-align: center;"></i>
+                                Email
+                            </strong>
+                            <p class="mb-0 ml-5 text-muted">krishnadentalclinic25@gmail.com</p>
                         </div>
                     </div>
 
-                    <!-- Feedback Form -->
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="ftco-footer-widget">
-                            <h2 class="ftco-heading-2 text-uppercase mb-3">Feedback</h2>
-                            <form action="@Url.Action("SubmitFeedback", "Home")" method="post" class="feedback-form">
-                                @Html.AntiForgeryToken()
-                                <div class="form-group">
-                                    <input type="text" name="PatientName" class="form-control mb-2 text-center rounded-pill" placeholder="Your Name" required>
-                                    <textarea name="FeedbackText" class="form-control mb-2 text-center rounded-pill" placeholder="Your Feedback" required></textarea>
-
-                                    <!-- Star Rating -->
-                                    <div class="rating text-center mb-2">
-                                        <input type="hidden" name="Rating" id="ratingValue" required>
-                                        <i class="fa fa-star" data-value="1"></i>
-                                        <i class="fa fa-star" data-value="2"></i>
-                                        <i class="fa fa-star" data-value="3"></i>
-                                        <i class="fa fa-star" data-value="4"></i>
-                                        <i class="fa fa-star" data-value="5"></i>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-warning w-100 rounded-pill">Submit</button>
-                                </div>
-                            </form>
+                    <!-- Working Hours -->
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <strong>
+                                <i class="fa-solid fa-clock text-warning fs-3 me-3" style="width: 30px; text-align: center;"></i>
+                                Working Hours
+                            </strong>
+                            <p class="mb-0 ml-5 text-muted">Morning: 9:30 AM - 1:30 PM IST<br>Evening: 4:30 PM - 9:30 PM IST</p>
                         </div>
-                    </div>
-
-                </div>
-
-                <!-- Copyright -->
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <p class="mb-0">&copy; 2025 Krishna Dental Clinic. All rights reserved.</p>
                     </div>
                 </div>
             </div>
-        </footer>
 
-        <style>
-            /* Footer Background */
-            .ftco-footer {
-                background: #222;
-                color: #fff;
+
+        </div>
+    </div>
+</section>
+
+
+
+<section id="Doctors-Section" class="ftco-section bg-light py-5">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 text-center heading-section ftco-animate">
+                <h2 class="mb-4 text-uppercase font-weight-bold">Our Qualified Doctors</h2>
+                <p class="text-muted">Meet our experienced dental specialists who ensure high-quality dental care.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Doctor 1 -->
+            <div class="col-md-6 col-lg-2 text-center ftco-animate">
+                <div class="staff" data-toggle="modal" data-target="#doctorModal"
+                     data-name="Dr.K.Vignesh MDS"
+                     data-position="Chief Dental Surgeon, Periodontist, Implantologist & Laser Specialist"
+                     data-image="/Content/images/Profile-1.jpg"
+                     data-description="Dr. K. Vignesh is a specialist in dental surgery, implants, and laser treatment.">
+                    <div class="img-wrap mx-auto headfix">
+                        <img src="/Content/images/Profile-1.jpg" class="img-fluid">
+                    </div>
+                    <h4 class="mt-3">Dr.K.Vignesh MDS</h4>
+                    <p class="text-muted small">Chief Dental Surgeon</p>
+                </div>
+            </div>
+
+            <!-- Doctor 2 -->
+            <div class="col-md-6 col-lg-2 text-center ftco-animate">
+                <div class="staff" data-toggle="modal" data-target="#doctorModal"
+                     data-name="Dr.I.Ragul MDS"
+                     data-position="Consultant Prosthodontist & Implantologist"
+                     data-image="/Content/images/profile-2.jpg">
+                    <div class="img-wrap mx-auto">
+                        <img src="/Content/images/profile-2.jpg" class="img-fluid">
+                    </div>
+                    <h4 class="mt-3">Dr.I.Ragul MDS</h4>
+                    <p class="text-muted small">Prosthodontist & Implantologist</p>
+                </div>
+            </div>
+
+            <!-- Doctor 3 -->
+            <div class="col-md-6 col-lg-2 text-center ftco-animate">
+                <div class="staff" data-toggle="modal" data-target="#doctorModal"
+                     data-name="Dr.Ramya Raja MDS"
+                     data-position="Consultant Pediatric Dentist"
+                     data-image="/Content/images/profile-3.jpg">
+                    <div class="img-wrap mx-auto headfix">
+                        <img src="/Content/images/profile-3.jpg" class="img-fluid">
+                    </div>
+                    <h4 class="mt-3">Dr.Ramya Raja MDS</h4>
+                    <p class="text-muted small">Pediatric Dentist</p>
+                </div>
+            </div>
+
+            <!-- Doctor 4 -->
+            <div class="col-md-6 col-lg-2 text-center ftco-animate">
+                <div class="staff" data-toggle="modal" data-target="#doctorModal"
+                     data-name="Dr.Rahul Chaurasia MDS "
+                     data-position="Senior Orthodontist"
+                     data-image="/Content/images/profile-4.jpg">
+                    <div class="img-wrap mx-auto headfix">
+                        <img src="/Content/images/profile-4.jpg" class="img-fluid">
+                    </div>
+                    <h4 class="mt-3">Dr.Rahul Chaurasia MDS</h4>
+                    <p class="text-muted small">Senior Orthodontist</p>
+                </div>
+            </div>
+
+            <!-- Doctor 5 -->
+            @*<div class="col-md-6 col-lg-2 text-center ftco-animate">
+                    <div class="staff" data-toggle="modal" data-target="#doctorModal"
+                         data-name="Dr. Rahul Chaurasia MDS"
+                         data-position="Senior Orthodontist"
+                         data-image="/Content/images/person_8.jpg">
+                        <div class="img-wrap mx-auto headfix">
+                            <img src="/Content/images/person_8.jpg" class="img-fluid">
+                        </div>
+                        <h4 class="mt-3">Dr. Rahul Chaurasia MDS</h4>
+                        <p class="text-muted small">Senior Orthodontist</p>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Section Background */
+    #Doctors-Section {
+        background-color: #f8f9fa;
+    }
+
+    /* Image Wrapper - Circular */
+    .img-wrap {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+        /* Doctor Image */
+        .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image fully fills the circle */
+            transition: all 0.3s ease-in-out;
+        }
+
+    .headfix img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top; /* Focus on upper part (head) */
+        transition: all 0.3s ease-in-out;
+    }
+    /* Hover Effect */
+
+    .img-wrap:hover {
+        width: 150px; /* Slightly wider */
+        height: 150px; /* Taller for better visibility */
+        border-radius: 10px; /* Change to rounded rectangle */
+    }
+
+        .img-wrap:hover img {
+            object-fit: cover;
+            object-position: top center; /* Keeps head properly positioned */
+            transform: scale(1.0);
+        }
+    /* Doctor Name */
+    .staff h4 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Doctor Title */
+    .staff p {
+        font-size: 0.9rem;
+    }
+
+    /* Responsive Layout */
+    @@media (max-width: 768px) {
+        .img-wrap {
+            width: 100px;
+            height: 100px;
+        }
+
+        .staff h4 {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+
+<!-- Doctor Details Modal -->
+<div class="modal fade" id="doctorModal" tabindex="-1" role="dialog" aria-labelledby="doctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="doctorName">Doctor Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="doctorImage" src="" class="img-fluid mb-3" style="max-width: 100%; border-radius: 10px;">
+                <h5 id="doctorPosition"></h5>
+                <p id="doctorDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section style="background: linear-gradient(135deg, #f0f2f5, #e3e6ea); padding: 50px 0;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12" style="background: #fff; padding: 50px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.08);">
+
+                <!-- Title -->
+                <h3 style="font-weight: 700; font-size: 24px; text-align: center; color: #333; margin-bottom: 30px;">
+                    📊 Real-Time Report
+                </h3>
+
+                <div class="row align-items-center">
+                    <!-- Left: Pageviews Chart -->
+                    <div class="col-lg-7 col-md-12">
+                        <h4 style="font-size: 18px; display: flex; align-items: center; font-weight: 600;">
+                            <span style="margin-right: 8px; color: #663399;">👁️</span> Pageviews Per Minute
+                        </h4>
+                        <div class="chart-container">
+                            <canvas id="pageviewsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right: Active Users & Total Visitors -->
+                    <div class="col-lg-5 col-md-12 d-flex flex-wrap justify-content-center">
+                        <!-- Right Now -->
+                        <div class="stat-box">
+                            <div class="stat-label">Right Now</div>
+                            <div id="activeUsers" class="stat-number" style="color: #28a745;">0</div>
+                            <div class="stat-text">Active users</div>
+                        </div>
+
+                        <div class="stat-box">
+                            <div class="stat-label">Total Visitors</div>
+                            <div id="totalVisitors" class="stat-number" style="color: #007bff;">0</div>
+                            <div class="stat-text">Total visitors</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Styles for Full Responsiveness -->
+<style>
+    .chart-container {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+   .stat-box {
+    background: #f9f9f9;
+    border-radius: 50%;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #ddd;
+    margin: 15px;
+    text-align: center;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.stat-box:hover {
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.stat-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.stat-number {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.stat-text {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Responsiveness */
+@@media (max-width: 768px) {
+    .stat-box {
+        width: 180px;
+        height: 180px;
+    }
+
+    .stat-number {
+        font-size: 36px;
+    }
+
+    .stat-label {
+        font-size: 16px;
+    }
+
+    .stat-text {
+        font-size: 13px;
+    }
+}
+
+@@media (max-width: 576px) {
+    .stat-box {
+        width: 150px;
+        height: 150px;
+    }
+
+    .stat-number {
+        font-size: 30px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+    }
+
+    .stat-text {
+        font-size: 12px;
+    }
+}
+
+</style>
+
+
+
+
+
+
+
+<section class="ftco-section testimony-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-8 text-center heading-section">
+                <span class="subheading">Testimonials</span>
+                <h2 class="mb-4">Our Patients Say About Us</h2>
+            </div>
+        </div>
+
+        <div class="owl-carousel feedback-carousel">
+            @foreach (var feedback in ViewBag.feedBack)
+            {
+                <div class="item">
+                    <div class="testimony-wrap d-flex">
+                        <div class="user-img">
+                        </div>
+                        <div class="text pl-4 bg-light">
+                            <span class="quote d-flex align-items-center justify-content-center">
+                                <i class="icon-quote-left"></i>
+                            </span>
+                            <p>@feedback.FeedbackText</p>
+                            <p class="name">@feedback.PatientName</p>
+                            <span class="position">
+                                @for (int i = 0; i < feedback.Rating; i++)
+                                {
+                                    <i class="fa-solid fa-tooth text-warning"></i> <!-- Teeth Rating -->
+                                }
+                            </span>
+                        </div>
+                    </div>
+                </div>
             }
+        </div>
 
-            /* Social Icons */
-            .ftco-footer-social a {
-                font-size: 1.5rem;
-                transition: transform 0.3s;
-            }
+    </div>
+</section>
+@*<section class="ftco-gallery">
+        <div class="container-wrap">
+            <div class="row no-gutters">
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-1.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-2.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-3.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url(../../Content/images/gallery-4.jpg);">
+                        <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                            <span class="icon-search"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>*@
 
-                .ftco-footer-social a:hover {
-                    transform: scale(1.2);
-                }
 
-            /* Footer Links */
-            .ftco-footer-widget ul li a {
-                transition: color 0.3s;
-            }
+<div id="map"></div>
+<footer class="ftco-footer ftco-bg-dark ftco-section py-5 text-light">
+    <div class="container">
+        <div class="row g-4 text-center text-md-left">
 
-                .ftco-footer-widget ul li a:hover {
-                    color: #f8d210;
-                }
+            <!-- Clinic Info -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="ftco-footer-widget">
+                    <h2 class="ftco-heading-2 text-uppercase mb-3">Krishna Dental Clinic</h2>
+                    <p>Established in 2025, Krishna Dental Clinic aims to provide high-quality dental care with advanced technology.</p>
+                    <ul class="ftco-footer-social list-unstyled d-flex justify-content-center justify-content-md-start">
+                        <li class="mx-2"><a href="#"><i class="fab fa-twitter fa-lg text-primary"></i></a></li>
+                        <li class="mx-2"><a href="#"><i class="fab fa-facebook-f fa-lg text-primary"></i></a></li>
+                        <li class="mx-2"><a href="https://www.instagram.com/krishnadent" target="_blank"><i class="fab fa-instagram fa-lg text-danger"></i></a></li>
+                    </ul>
+                </div>
+            </div>
 
-            /* Star Rating */
-            .rating i {
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: #ccc;
-                transition: color 0.3s;
-            }
+            <!-- Quick Links -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="ftco-footer-widget">
+                    <h2 class="ftco-heading-2 text-uppercase mb-3">Quick Links</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="#About-Section" class="d-block py-1 text-light">About</a></li>
+                        <li><a href="#Service-Section" class="d-block py-1 text-light">Services</a></li>
+                        <li><a href="#Doctors-Section" class="d-block py-1 text-light">Dentists</a></li>
+                        <li><a href="#appointment-section" class="d-block py-1 text-light">Make Appointment</a></li>
+                        <li><a href="#contactus-section" class="d-block py-1 text-light">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
 
-                .rating i:hover,
-                .rating i.active {
-                    color: gold;
-                }
+            <!-- Subscription Form -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="ftco-footer-widget">
+                    <h2 class="ftco-heading-2 text-uppercase mb-3">Subscribe</h2>
+                    <form action="@Url.Action("subscription", "Home")" method="post" class="subscribe-form">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control mb-2 text-center rounded-pill" placeholder="Enter email" required>
+                            <input type="tel" name="phoneNumber" class="form-control mb-2 text-center rounded-pill"
+                                   placeholder="Enter phone number" maxlength="10"
+                                   pattern="[6789][0-9]{9}" title="Phone must start with 6-9 and be 10 digits"
+                                   required>
+                            <button type="submit" class="btn btn-success w-100 rounded-pill">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-            /* Responsive Adjustments */
-            @@media (max-width: 768px) {
-                .ftco-footer .col-lg-3 {
-                    text-align: center;
-                }
-            }
+            <!-- Feedback Form -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="ftco-footer-widget">
+                    <h2 class="ftco-heading-2 text-uppercase mb-3">Feedback</h2>
+                    <form action="@Url.Action("SubmitFeedback", "Home")" method="post" class="feedback-form">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <input type="text" name="PatientName" class="form-control mb-2 text-center rounded-pill" placeholder="Your Name" required>
+                            <textarea name="FeedbackText" class="form-control mb-2 text-center rounded-pill" placeholder="Your Feedback" required></textarea>
 
-            @@media (max-width: 480px) {
-                .ftco-footer .col-lg-3 {
-                    padding-bottom: 20px;
-                }
-            }
-        </style>
+                            <!-- Star Rating -->
+                            <div class="rating text-center mb-2">
+                                <input type="hidden" name="Rating" id="ratingValue" required>
+                                <i class="fa fa-star" data-value="1"></i>
+                                <i class="fa fa-star" data-value="2"></i>
+                                <i class="fa fa-star" data-value="3"></i>
+                                <i class="fa fa-star" data-value="4"></i>
+                                <i class="fa fa-star" data-value="5"></i>
+                            </div>
 
-        @section Scripts
+                            <button type="submit" class="btn btn-warning w-100 rounded-pill">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Copyright -->
+        <div class="row mt-4">
+            <div class="col text-center">
+                <p class="mb-0">&copy; 2025 Krishna Dental Clinic. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* Footer Background */
+    .ftco-footer {
+        background: #222;
+        color: #fff;
+    }
+
+    /* Social Icons */
+    .ftco-footer-social a {
+        font-size: 1.5rem;
+        transition: transform 0.3s;
+    }
+
+        .ftco-footer-social a:hover {
+            transform: scale(1.2);
+        }
+
+    /* Footer Links */
+    .ftco-footer-widget ul li a {
+        transition: color 0.3s;
+    }
+
+        .ftco-footer-widget ul li a:hover {
+            color: #f8d210;
+        }
+
+    /* Star Rating */
+    .rating i {
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #ccc;
+        transition: color 0.3s;
+    }
+
+        .rating i:hover,
+        .rating i.active {
+            color: gold;
+        }
+
+    /* Responsive Adjustments */
+    @@media (max-width: 768px) {
+        .ftco-footer .col-lg-3 {
+            text-align: center;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .ftco-footer .col-lg-3 {
+            padding-bottom: 20px;
+        }
+    }
+</style>
+
+@section Scripts
     {
 
-            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var map = L.map('googleMap').setView([11.937833, 79.818772], 17);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '<a href="https://www.openstreetmap.org/copyright"></a>'
+        }).addTo(map);
+
+        L.marker([11.937833, 79.818772]).addTo(map)
+            .bindTooltip('Krishna Dental clinic & Implant centre')
+            .openPopup();
 
 
-            <script>
-                var map = L.map('googleMap').setView([11.937833, 79.818772], 17);
-
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '<a href="https://www.openstreetmap.org/copyright"></a>'
-                }).addTo(map);
-
-                L.marker([11.937833, 79.818772]).addTo(map)
-                    .bindTooltip('Krishna Dental clinic & Implant centre')
-                    .openPopup();
 
 
+        $(document).ready(function () {
+            $('.staff').click(function () {
+                var name = $(this).data('name');
+                var position = $(this).data('position');
+                var image = $(this).data('image');
+                var description = $(this).data('description');
+
+                // Debugging - Check if values are correctly retrieved
+                console.log("Name:", name);
+                console.log("Position:", position);
+                console.log("Image:", image);
+                console.log("Description:", description);
+
+                // Ensure values exist before setting them
+                if (name) $('#doctorName').text(name);
+                if (position) $('#doctorPosition').text(position);
+                if (image) $('#doctorImage').attr('src', image);
+                if (description) $('#doctorDescription').text(description);
+
+                // Show modal manually
+                $('#doctorModal').modal('show');
+            });
+        });
 
 
-                $(document).ready(function () {
-                    $('.staff').click(function () {
-                        var name = $(this).data('name');
-                        var position = $(this).data('position');
-                        var image = $(this).data('image');
-                        var description = $(this).data('description');
+        document.addEventListener("DOMContentLoaded", function () {
+            const teeth = document.querySelectorAll(".rating .fa-star");
+            const ratingInput = document.getElementById("ratingValue");
 
-                        // Debugging - Check if values are correctly retrieved
-                        console.log("Name:", name);
-                        console.log("Position:", position);
-                        console.log("Image:", image);
-                        console.log("Description:", description);
+            teeth.forEach(tooth => {
+                tooth.addEventListener("click", function () {
+                    const value = this.getAttribute("data-value");
+                    ratingInput.value = value;
 
-                        // Ensure values exist before setting them
-                        if (name) $('#doctorName').text(name);
-                        if (position) $('#doctorPosition').text(position);
-                        if (image) $('#doctorImage').attr('src', image);
-                        if (description) $('#doctorDescription').text(description);
-
-                        // Show modal manually
-                        $('#doctorModal').modal('show');
+                    // Remove previous styles
+                    teeth.forEach(t => {
+                        t.classList.remove("text-warning", "shake");
                     });
-                });
 
+                    // Apply shake and color to selected teeth
+                    for (let i = 0; i < value; i++) {
+                        teeth[i].classList.add("text-warning", "shake");
 
-                document.addEventListener("DOMContentLoaded", function () {
-                    const teeth = document.querySelectorAll(".rating .fa-star");
-                    const ratingInput = document.getElementById("ratingValue");
-
-                    teeth.forEach(tooth => {
-                        tooth.addEventListener("click", function () {
-                            const value = this.getAttribute("data-value");
-                            ratingInput.value = value;
-
-                            // Remove previous styles
-                            teeth.forEach(t => {
-                                t.classList.remove("text-warning", "shake");
-                            });
-
-                            // Apply shake and color to selected teeth
-                            for (let i = 0; i < value; i++) {
-                                teeth[i].classList.add("text-warning", "shake");
-
-                                // Remove shake effect after animation completes
-                                setTimeout(() => {
-                                    teeth[i].classList.remove("shake");
-                                }, 300);
-                            }
-                        });
-                    });
-                });
-            </script>
-            <script>
-                jQuery.noConflict();
-                jQuery(document).ready(function ($) {
-                    if ($.fn.owlCarousel) {
-                        $(".feedback-carousel").owlCarousel({
-                            loop: true,
-                            margin: 20,
-                            nav: false,
-                            dots: true,
-                            autoplay: true,
-                            autoplayTimeout: 3500,
-                            autoplayHoverPause: true,
-                            smartSpeed: 1000,  // Slower speed for smoothness
-                            autoplaySpeed: 1000,
-                            dotsSpeed: 800,
-                            animateOut: 'fadeOutUp',
-                            animateIn: 'fadeInDown',  // Bounces in// Bounces in  // Soft fade-in effect , // Slide in from the left
-                            responsive: {
-                                0: { items: 1 },
-                                768: { items: 2 },
-                                1024: { items: 3 }
-                            }
-                        });
-                    } else {
-                        console.error("Owl Carousel plugin is not loaded!");
+                        // Remove shake effect after animation completes
+                        setTimeout(() => {
+                            teeth[i].classList.remove("shake");
+                        }, 300);
                     }
                 });
+            });
+        });
+    </script>
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function ($) {
+            if ($.fn.owlCarousel) {
+                $(".feedback-carousel").owlCarousel({
+                    loop: true,
+                    margin: 20,
+                    nav: false,
+                    dots: true,
+                    autoplay: true,
+                    autoplayTimeout: 3500,
+                    autoplayHoverPause: true,
+                    smartSpeed: 1000,  // Slower speed for smoothness
+                    autoplaySpeed: 1000,
+                    dotsSpeed: 800,
+                    animateOut: 'fadeOutUp',
+                    animateIn: 'fadeInDown',  // Bounces in// Bounces in  // Soft fade-in effect , // Slide in from the left
+                    responsive: {
+                        0: { items: 1 },
+                        768: { items: 2 },
+                        1024: { items: 3 }
+                    }
+                });
+            } else {
+                console.error("Owl Carousel plugin is not loaded!");
+            }
+        });
 
 
-            </script>
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        }
+    <script>
+        $(document).ready(function () {
+            // Chart initialization
+            var ctx = document.getElementById('pageviewsChart').getContext('2d');
+            var pageviewsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Pageviews Per Minute',
+                        data: [],
+                        borderColor: 'purple',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // AJAX update function
+            function updateData() {
+                $.ajax({
+                    url: '/Home/GetRealTimeData',
+                    type: 'GET',
+                    success: function (response) {
+                        let labels = response.labels;
+                        let data = response.data;
+                        let users = response.activeUsers;
+                        let visitors = response.totalVisitors;
+
+                        pageviewsChart.data.labels = labels;
+                        pageviewsChart.data.datasets[0].data = data;
+                        pageviewsChart.update();
+
+                        document.getElementById("activeUsers").innerText = users;
+                        document.getElementById("totalVisitors").innerText = visitors;
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error:", error);
+                    }
+                });
+            }
+
+            // Call once on load
+            updateData();
+
+            // Refresh every 10 minutes (600,000 ms)
+            setInterval(updateData, 9000);
+        });
+    </script>
+
+
+}

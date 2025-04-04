@@ -419,5 +419,18 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         }
 
 
+        public JsonResult GetRealTimeData()
+        {
+            Random rnd = new Random();
+            var labels = Enumerable.Range(1, 10).Select(i => $"{i} min ago").ToList();
+            var data = labels.Select(_ => rnd.Next(10, 50)).ToList();
+
+            int activeUsers = MvcApplication.GetActiveUserCount(); // Get real-time users
+            int totalVisitors = db.SiteStats.OrderByDescending(s => s.Id).FirstOrDefault()?.TotalVisitors ?? 0;
+
+            return Json(new { labels, data, activeUsers, totalVisitors }, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

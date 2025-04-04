@@ -65,6 +65,14 @@
           <Property Name="Contact" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="BloodGroup" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="SiteStats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalVisitors" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
         <EntityType Name="subscription">
           <Key>
             <PropertyRef Name="Id" />
@@ -79,6 +87,7 @@
           <EntitySet Name="Dentist" EntityType="Self.Dentist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeedBack" EntityType="Self.FeedBack" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientRegister" EntityType="Self.PatientRegister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteStats" EntityType="Self.SiteStats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subscription" EntityType="Self.subscription" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -92,6 +101,7 @@
           <EntitySet Name="subscriptions" EntityType="DentalClinicModel.subscription" />
           <EntitySet Name="DentalNews" EntityType="DentalClinicModel.DentalNew" />
           <EntitySet Name="FeedBacks" EntityType="DentalClinicModel.FeedBack" />
+          <EntitySet Name="SiteStats" EntityType="DentalClinicModel.SiteStat" />
         </EntityContainer>
         <EntityType Name="PatientRegister">
           <Key>
@@ -160,6 +170,14 @@
           <Property Name="FeedbackText" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Rating" Type="Int32" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SiteStat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalVisitors" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -237,6 +255,15 @@
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="FeedbackText" ColumnName="FeedbackText" />
                 <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteStats">
+            <EntityTypeMapping TypeName="DentalClinicModel.SiteStat">
+              <MappingFragment StoreEntitySet="SiteStats">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="TotalVisitors" ColumnName="TotalVisitors" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

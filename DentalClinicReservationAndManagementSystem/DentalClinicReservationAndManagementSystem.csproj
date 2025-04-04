@@ -187,6 +187,9 @@
       <DependentUpon>Dental.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteStat.cs">
+      <DependentUpon>Dental.tt</DependentUpon>
+    </Compile>
     <Compile Include="subscription.cs">
       <DependentUpon>Dental.tt</DependentUpon>
     </Compile>
@@ -301,6 +304,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\react.png" />
+    <Content Include="Content\images\Services List.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\sidebar-1.jpg" />
     <Content Include="Content\images\sidebar-2.jpg" />
     <Content Include="Content\images\sidebar-3.jpg" />
