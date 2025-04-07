@@ -38,6 +38,26 @@
         cursor: pointer;
         transition: color 0.4s;
     }
+    /* Ensure the text adjusts properly */
+    @@media (max-width: 767px) {
+        #email-text, #hours-text {
+            font-size: 0.875rem; /* Smaller font size for mobile devices */
+        }
+    }
+
+    @@media (min-width: 768px) and (max-width: 1024px) {
+        #email-text, #hours-text {
+            font-size: 1rem; /* Slightly larger font for tablets */
+        }
+    }
+
+    @@media (min-width: 1025px) {
+        #email-text, #hours-text {
+            font-size: 1.125rem; /* Default font size for larger screens */
+        }
+    }
+
+
 
     @@keyframes shake {
         0% {
@@ -289,34 +309,42 @@
     }
 </style>
 <section class="home-slider owl-carousel">
-    <div class="slider-item" style="background-image: url('../../Content/images/display_3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
+    <div class="slider-item" style="background-image: url('../../Content/images/caro3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
         <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
         <div class="container-fluid h-100">
             <div class="row slider-text align-items-center justify-content-center h-100">
-                <div class="col-md-10 col-lg-8 text ftco-animate p-4 text-center text-md-left" style="color: #fff; background: rgba(0, 0, 0, 0.3); border-radius: 10px;">
-                    <h1 class="mb-4" style="font-size: 4vw; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); color: cyan;">
-                        Helping Your <span style="color: #f8d210;">Stay Happy One</span>
-                    </h1>
-                    <h3 class="subheading" style="font-size: 2vw; font-style: italic; font-weight: bold; color: cyan;">
-                        Everyday We Bring Hope and Smile to the Patient We Serve
-                    </h3>
-                </div>
+                
             </div>
         </div>
     </div>
-
+    <div class="slider-item" style="background-image: url('../../Content/images/caro2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
+        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
+        <div class="container-fluid h-100">
+            <div class="row slider-text align-items-center justify-content-center h-100">
+               
+            </div>
+        </div>
+    </div>
+    <div class="slider-item" style="background-image: url('../../Content/images/caro1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
+        <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
+        <div class="container-fluid h-100">
+            <div class="row slider-text align-items-center justify-content-center h-100">
+                
+            </div>
+        </div>
+    </div>
     <div class="slider-item" style="background-image: url('../../Content/images/display_1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; height: 100vh;">
         <div class="overlay"></div>
         <div class="container-fluid h-100">
             <div class="row slider-text align-items-center justify-content-center h-100">
-                <div class="col-md-10 col-lg-8 text ftco-animate p-4 text-center text-md-left">
+                @*<div class="col-md-10 col-lg-8 text ftco-animate p-4 text-center text-md-left">
                     <h1 class="mb-4" style="font-size: 4vw; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); color: crimson;">
                         Smile Makes <br><span style="color: #f8d210;">A Lasting Impression</span>
                     </h1>
                     <h3 class="subheading" style="font-size: 2vw; font-weight: bold; font-style: italic; color: crimson;">
                         Your Health is Our Top Priority with Comprehensive, Affordable Medical.
                     </h3>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -325,14 +353,14 @@
         <div class="overlay"></div>
         <div class="container-fluid h-100">
             <div class="row slider-text align-items-center justify-content-center h-100">
-                <div class="col-md-10 col-lg-8 text ftco-animate p-4 text-center text-md-left">
+                @*<div class="col-md-10 col-lg-8 text ftco-animate p-4 text-center text-md-left">
                     <h1 class="mb-4" style="font-size: 4vw; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); color: firebrick;">
                         Bringing Care <span style="color: #f8d210;">To Your Family</span>
                     </h1>
                     <h3 class="subheading" style="font-size: 2vw; font-style: italic; font-weight: bold; color: firebrick;">
                         We Ensure the Best Medical Services for You and Your Loved Ones
                     </h3>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -492,19 +520,83 @@
         </div>
     </div>
 </section>
-<section class="ftco-section ftco-services" id="Service-Section">
+<section class="ftco-section ftco-services py-5" id="Service-Section" style="background: linear-gradient(to right, #f8fbff, #eef5ff);">
     <div class="container">
-        <div class="row justify-content-center  pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-2 text-primary">Enhancing Your Smile, One Step at a Time</h2>
-                <p class="text-muted">Experience professional dental care with cutting-edge treatments designed to keep your smile healthy and bright.</p>
+        <div class="row justify-content-center pb-5">
+            <div class="col-lg-8 text-center heading-section">
+                <h2 class="mb-4 text-primary fw-bold display-5">Enhancing Your Smile, One Step at a Time</h2>
+                <p class="text-muted fs-5">Experience <strong>professional dental care</strong> with <em>cutting-edge treatments</em> designed to keep your smile <span class="text-primary">healthy and bright</span>.</p>
             </div>
         </div>
-        <div class="row col-12">
-            <img src="~/Content/images/Services List.png" class="img-fluid" alt="Dental Services" style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="image-container position-relative overflow-hidden rounded-4 shadow-lg">
+                    <img src="~/Content/images/Services List.png" class="img-fluid w-100 service-image" alt="Dental Services">
+                    <div class="image-overlay d-flex align-items-center justify-content-center">
+                        <div class="overlay-text text-white text-center">
+                            <h3 class="mb-3">Comprehensive Dental Services</h3>
+                            <p>From routine check-ups to advanced procedures — all under one roof.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<!-- Include this in your CSS or inside <style> tag -->
+<style>
+    .image-container {
+        position: relative;
+        transition: transform 0.4s ease;
+    }
+
+    .service-image {
+        border-radius: 20px;
+        transition: transform 0.5s ease;
+    }
+
+    .image-container:hover .service-image {
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(6px);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        border-radius: 20px;
+    }
+
+    .image-container:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .overlay-text h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    .overlay-text p {
+        font-size: 1.1rem;
+    }
+
+    @@media (max-width: 768px) {
+        .overlay-text h3 {
+            font-size: 1.4rem;
+        }
+
+        .overlay-text p {
+            font-size: 1rem;
+        }
+    }
+</style>
+
 
 
 
@@ -552,8 +644,8 @@
         <!-- Section Title -->
         <div class="row justify-content-center pb-4">
             <div class="col-md-8 text-center">
-                <h2 class="mb-3 fw-bold text-uppercase">Get in Touch</h2>
-                <p class="text-muted">We are here to help. Contact us for appointments, queries, or any assistance.</p>
+                <h2 class="mb-3 fw-bold text-uppercase fs-1 fs-md-2 fs-lg-3">Get in Touch</h2>
+                <p class="text-muted fs-5 fs-md-6 fs-lg-7">We are here to help. Contact us for appointments, queries, or any assistance.</p>
             </div>
         </div>
 
@@ -574,14 +666,13 @@
             <!-- Contact Info Section -->
             <div class="col-lg-6 col-md-12 d-flex align-items-stretch">
                 <div class="w-100 p-4 bg-white rounded shadow-lg">
-                    <h3 class="mb-4 text-center text-primary fw-bold">Our Clinic Information</h3>
+                    <h3 class="mb-4 text-center text-primary fw-bold fs-4 fs-md-5 fs-lg-6">Our Clinic Information</h3>
 
                     <!-- Location -->
                     <div class="d-flex align-items-center mb-3">
-
                         <div>
                             <strong><i class="fa-solid fa-location-dot text-danger fs-3 me-3" style="width: 30px; text-align: center;"></i>Location</strong>
-                            <p class="mb-0 ml-5 text-muted">NO.130, Kamaraj Salai, Puducherry - 605013</p>
+                            <p class="mb-0 ml-5 text-muted fs-6 fs-md-7 fs-lg-8">NO.130, Kamaraj Salai, Puducherry - 605013</p>
                         </div>
                     </div>
 
@@ -592,7 +683,7 @@
                                 <i class="fa-solid fa-phone text-success fs-3 me-3" style="width: 30px; text-align: center;"></i>
                                 Call Us
                             </strong>
-                            <p class="mb-0 ml-5 text-muted">+91-9190144066<br>+91-8778653142</p>
+                            <p class="mb-0 ml-5 text-muted fs-6 fs-md-7 fs-lg-8">+91-9190144066<br>+91-8778653142</p>
                         </div>
                     </div>
 
@@ -603,7 +694,7 @@
                                 <i class="fa-solid fa-envelope text-primary fs-3 me-3" style="width: 30px; text-align: center;"></i>
                                 Email
                             </strong>
-                            <p class="mb-0 ml-5 text-muted">krishnadentalclinic25@gmail.com</p>
+                            <p class="mb-0 ml-5 text-muted fs-6 fs-md-7 fs-lg-8" id="email-text">krishnadentalclinic25@gmail.com</p>
                         </div>
                     </div>
 
@@ -614,16 +705,17 @@
                                 <i class="fa-solid fa-clock text-warning fs-3 me-3" style="width: 30px; text-align: center;"></i>
                                 Working Hours
                             </strong>
-                            <p class="mb-0 ml-5 text-muted">Morning: 9:30 AM - 1:30 PM IST<br>Evening: 4:30 PM - 9:30 PM IST</p>
+                            <p class="mb-0 ml-5 text-muted fs-6 fs-md-7 fs-lg-8" id="hours-text">Morning: 9:30 AM - 1:30 PM IST<br>Evening: 4:30 PM - 9:30 PM IST</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-
         </div>
     </div>
 </section>
+
+
 
 
 
@@ -648,7 +740,7 @@
                         <img src="/Content/images/Profile-1.jpg" class="img-fluid">
                     </div>
                     <h4 class="mt-3">Dr.K.Vignesh MDS</h4>
-                    <p class="text-muted small">Chief Dental Surgeon</p>
+                    <p class="text-muted small">Chief Dental Surgeon,Periodontist, Implantologist & Laser Specialist</p>
                 </div>
             </div>
 
@@ -684,13 +776,13 @@
             <div class="col-md-6 col-lg-2 text-center ftco-animate">
                 <div class="staff" data-toggle="modal" data-target="#doctorModal"
                      data-name="Dr.Rahul Chaurasia MDS "
-                     data-position="Senior Orthodontist"
+                     data-position="Consultant Endodontist"
                      data-image="/Content/images/profile-4.jpg">
                     <div class="img-wrap mx-auto headfix">
                         <img src="/Content/images/profile-4.jpg" class="img-fluid">
                     </div>
                     <h4 class="mt-3">Dr.Rahul Chaurasia MDS</h4>
-                    <p class="text-muted small">Senior Orthodontist</p>
+                    <p class="text-muted small">Consultant Endodontist</p>
                 </div>
             </div>
 
@@ -857,84 +949,83 @@
         height: auto;
     }
 
-   .stat-box {
-    background: #f9f9f9;
-    border-radius: 50%;
-    width: 220px;
-    height: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid #ddd;
-    margin: 15px;
-    text-align: center;
-    padding: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-.stat-box:hover {
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-}
-
-.stat-label {
-    font-size: 18px;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 8px;
-}
-
-.stat-number {
-    font-size: 42px;
-    font-weight: bold;
-}
-
-.stat-text {
-    font-size: 14px;
-    color: #666;
-    margin-top: 5px;
-}
-
-/* Responsiveness */
-@@media (max-width: 768px) {
     .stat-box {
-        width: 180px;
-        height: 180px;
+        background: #f9f9f9;
+        border-radius: 100%;
+        width: 220px;
+        height: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 8px solid #ddd;
+        margin: 15px;
+        text-align: center;
+        padding: 10px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .stat-box:hover {
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+    .stat-label {
+        font-size: 18px;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 8px;
     }
 
     .stat-number {
-        font-size: 36px;
-    }
-
-    .stat-label {
-        font-size: 16px;
+        font-size: 42px;
+        font-weight: bold;
     }
 
     .stat-text {
-        font-size: 13px;
-    }
-}
-
-@@media (max-width: 576px) {
-    .stat-box {
-        width: 150px;
-        height: 150px;
-    }
-
-    .stat-number {
-        font-size: 30px;
-    }
-
-    .stat-label {
         font-size: 14px;
+        color: #666;
+        margin-top: 5px;
     }
 
-    .stat-text {
-        font-size: 12px;
-    }
-}
+    /* Responsiveness */
+    @@media (max-width: 768px) {
+        .stat-box {
+            width: 180px;
+            height: 180px;
+        }
 
+        .stat-number {
+            font-size: 36px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+        }
+
+        .stat-text {
+            font-size: 13px;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .stat-box {
+            width: 150px;
+            height: 150px;
+        }
+
+        .stat-number {
+            font-size: 30px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+        }
+
+        .stat-text {
+            font-size: 12px;
+        }
+    }
 </style>
 
 
@@ -1027,7 +1118,7 @@
                     <p>Established in 2025, Krishna Dental Clinic aims to provide high-quality dental care with advanced technology.</p>
                     <ul class="ftco-footer-social list-unstyled d-flex justify-content-center justify-content-md-start">
                         <li class="mx-2"><a href="#"><i class="fab fa-twitter fa-lg text-primary"></i></a></li>
-                        <li class="mx-2"><a href="#"><i class="fab fa-facebook-f fa-lg text-primary"></i></a></li>
+                        <li class="mx-2"><a href="https://www.facebook.com/profile.php?id=61574878299853"><i class="fab fa-facebook-f fa-lg text-primary"></i></a></li>
                         <li class="mx-2"><a href="https://www.instagram.com/krishnadent" target="_blank"><i class="fab fa-instagram fa-lg text-danger"></i></a></li>
                     </ul>
                 </div>

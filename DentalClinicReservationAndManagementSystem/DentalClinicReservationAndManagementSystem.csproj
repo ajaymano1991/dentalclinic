@@ -249,6 +249,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\bg_3.jpg" />
+    <Content Include="Content\images\caro1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\caro2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\caro3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\cover.jpg" />
     <Content Include="Content\images\display_1.jpg" />
     <Content Include="Content\images\display_2.jpg" />
@@ -316,7 +325,9 @@
     <Content Include="Content\images\logo2.jpeg" />
     <Content Include="Content\images\logo5.jpeg" />
     <Content Include="Content\images\welcome.jpg" />
-    <Content Include="Content\js\aos.js" />
+    <Content Include="Content\js\aos.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\core\bootstrap-material-design.min.js" />
