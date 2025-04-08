@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="@Url.Content("../../Content/css/flaticon.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/icomoon.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/style.css")">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <script type="application/ld+json">
         {
           "@@context": "https://schema.org",
@@ -181,7 +183,7 @@
                 <div class="col-md-4 order-md-3 d-flex topper mb-md-0 align-items-center">
                     <div class="icon d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
                     <div class="text pl-3 pl-md-3">
-                        <p class="hr"><span>Open Hours</span></p>
+                        <p class="hr"><span>Opening Hours</span></p>
                         <p class="time"><span>Morning:</span> <span>9:30am - 1:30pm </span></p>
                         <p class="time"><span>Evening:</span> <span>4:30am - 9:30pm </span></p>
                     </div>
@@ -194,7 +196,7 @@
             📢 Book your appointment today! | Get a free consultation for new patients! | Call us at +91-9790144066
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-lite bg-light ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                     aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -232,8 +234,48 @@
         @RenderBody()
     </main>
 
+    <!-- Add the alert script just before closing the body tag -->
+    <script>
+        function showAlert(message, type = 'success') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show fixed-top mx-auto mt-3`;
+            alertDiv.style.width = 'fit-content';
+            alertDiv.style.zIndex = '1050';
+            alertDiv.role = 'alert';
+            alertDiv.innerHTML = `
+                                                <strong>${type.charAt(0).toUpperCase() + type.slice(1)}!</strong> ${message}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            `;
+            document.body.appendChild(alertDiv);
 
+            // Auto-dismiss after 4 seconds
+            setTimeout(() => {
+                alertDiv.classList.remove("show");
+                alertDiv.classList.add("hide");
+                alertDiv.remove();
+            }, 10000);
+        }
+    </script>
 
+    @* Check if TempData contains success message and trigger alert *@
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            showAlert("@TempData["Success"]", "success");
+        </script>
+    }
+    @if (TempData["Warning"] != null)
+    {
+        <script>
+            showAlert("@TempData["Warning"]", "warning");
+        </script>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <script>
+            showAlert("@TempData["Error"]","error");
+        </script>
+    }
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
 
@@ -345,10 +387,10 @@
 
     <!--End Nav-->
     @RenderSection("Scripts")
-    <script src="../../Content/js/jquery.min.js"></script>
+
     <script src="../../Content/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="../../Content/js/popper.min.js"></script>
-    <script src="../../Content/js/bootstrap.min.js"></script>
+
     <script src="../../Content/js/jquery.easing.1.3.js"></script>
     <script src="../../Content/js/jquery.waypoints.min.js"></script>
     <script src="../../Content/js/jquery.stellar.min.js"></script>
@@ -362,6 +404,8 @@
     <script src="../../Content/js/main.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -388,6 +432,41 @@
             }
         });
     </script>
+
+    <script>
+
+            function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show shadow`;
+            alertDiv.setAttribute("role", "alert");
+
+            // Style for bottom-center positioning
+            alertDiv.style.position = 'relative';
+            alertDiv.style.bottom = '20px';
+            alertDiv.style.left = '50%';
+            alertDiv.style.transform = 'translateX(-50%)';
+            alertDiv.style.zIndex = '1055';
+            alertDiv.style.maxWidth = '90%';
+            alertDiv.style.minWidth = '300px';
+            alertDiv.style.textAlign = 'center';
+
+            alertDiv.innerHTML = `
+            <strong>${type.charAt(0).toUpperCase() + type.slice(1)}:</strong> ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+
+            document.body.appendChild(alertDiv);
+
+            // Auto-dismiss after 10 seconds
+            setTimeout(() => {
+                alertDiv.classList.remove("show");
+            alertDiv.classList.add("hide");
+                setTimeout(() => alertDiv.remove(), 500); // Wait for fade out
+            }, 6000);
+        }
+    </script>
+
+    
 
 
 

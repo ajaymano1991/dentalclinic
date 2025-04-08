@@ -298,18 +298,35 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         }
         [HttpPost]
         public ActionResult TakeAppointment(DentalClinicReservationAndManagementSystem.Models.Appointment appointment)
-        {
-            ViewBag.Message2 = "";
+        {  
             if (ModelState.IsValid)
             {
+                TimeSpan morningStart = new TimeSpan(9, 30, 0);   // 9:30 AM
+                TimeSpan morningEnd = new TimeSpan(13, 30, 0);    // 1:30 PM
+                TimeSpan eveningStart = new TimeSpan(16, 30, 0);  // 4:30 PM
+                TimeSpan eveningEnd = new TimeSpan(21, 30, 0);    // 9:30 PM
+
+                // Extract the time component of the preferred appointment time
+                TimeSpan appointmentTime = appointment.PreferredDateTime.TimeOfDay;
+
+                // Check if the appointment time is within the clinic's operating hours
+                bool isInMorningSlot = appointmentTime >= morningStart && appointmentTime <= morningEnd;
+                bool isInEveningSlot = appointmentTime >= eveningStart && appointmentTime <= eveningEnd;
+
+                if (!isInMorningSlot && !isInEveningSlot)
+                {
+                    TempData["Warning"] = "⏰ The selected time is outside of our operating hours. Please choose a time between 9:30 AM - 1:30 PM or 4:30 PM - 9:30 PM.";
+                    return RedirectToAction("Index");
+                }
+
                 var appointments = db.Appointments.AsEnumerable() 
                                     .Where(a => a.PreferredDateTime == appointment.PreferredDateTime)
                                     .ToList();
 
                 if (appointments.Count>0)
                 {
-                    ViewBag.Message2 = "Time slot is not available";
-                    return View("Index", appointment);
+                    TempData["Warning"] = "⏰ The selected time slot is currently unavailable. Please choose a different one.";
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -326,6 +343,8 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                     try
                     {
                         db.SaveChanges();
+                        TempData["Success"] = "🎉 Your appointment has been successfully booked! We look forward to seeing you soon.";
+
                     }
                     catch (DbEntityValidationException ex)
                     {
@@ -341,7 +360,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View();
+            return RedirectToAction("Index");
         }
         public ActionResult SeeAppointments()
         {
@@ -372,7 +391,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
             if (subscribied != null)
             {
-                ViewBag.Message2 = "Already subscribied";
+                TempData["Warning"] = "You're already subscribed! Thank you for staying connected with us.";
                 return View("Index");
             }
             else
@@ -385,6 +404,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
                 db.subscriptions.Add(newsubscription);
                 db.SaveChanges();
+                TempData["Success"] = "🎉 Thank you for subscribing! We’re excited to have you with us.";
                 return RedirectToAction("Index");
             }
         }
@@ -402,8 +422,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
                 db.FeedBacks.Add(newFeedback);
                 db.SaveChanges();
-
-                ViewBag.Message2 = "Thank you for your feedback!";
+              TempData["Success"] = "Thank you for your feedback!";
               return RedirectToAction("Index");
 
         }
