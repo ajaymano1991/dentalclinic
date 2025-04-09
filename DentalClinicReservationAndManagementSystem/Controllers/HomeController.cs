@@ -450,6 +450,22 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             return Json(new { labels, data, activeUsers, totalVisitors }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+       
+        public JsonResult GetAppointments()
+        {
+            var appointments = db.Appointments
+                .ToList() // Pulls data into memory first
+                .Select(a => new
+                {
+                    title = a.ReasonForAppointment + " - " + a.PatientName,
+                    start = a.PreferredDateTime.ToString("yyyy-MM-dd")
+                })
+                .ToList();
+
+            return Json(appointments, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

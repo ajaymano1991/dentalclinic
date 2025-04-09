@@ -8,8 +8,8 @@
     <meta name="author" content="SoftBizGen">
     <title>Krishna Dental Clinic - Best Dental Care in Pondicherry</title>
     <link rel="icon" type="image/png" href="~/Content/images/logo3.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/open-iconic-bootstrap.min.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/animate.css")">
     <link rel="stylesheet" href="@Url.Content("../../Content/css/owl.carousel.min.css")">
@@ -71,6 +71,9 @@
     </script>
 
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
         @@keyframes scroll-left {
             0% {
                 transform: translateX(100%);
@@ -165,32 +168,43 @@
 
 </head>
 <body>
-    <div class="">
+    <div class="bg-light py-3 border-bottom shadow-sm">
         <div class="container">
-            <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
-                <div class="col-md-4 order-md-2 mb-0 mb-md-0 align-items-center text-center">
-                    <a href="#home"><img src="~/Content/images/logo3.png" alt="Logo" class="img-fluid" style="max-height: 150px;"></a>
+            <div class="row align-items-center text-center text-md-left">
+                <!-- Logo Centered on Mobile, Right on Desktop -->
+                <div class="col-md-4 text-center mb-3 mb-md-0 order-2 order-md-2">
+                    <a href="#home">
+                        <img src="~/Content/images/logo3.png" alt="Krishna Dental Clinic Logo" class="img-fluid" style="max-height: 120px;">
+                    </a>
                 </div>
-                <div class="col-md-4 order-md-1 d-flex topper mb-md-0 mb-0 align-items-center text-md-right">
-                    <div class="icon d-flex justify-content-center align-items-center order-md-last">
-                        <span class="icon-map"></span>
-                    </div>
-                    <div class="pr-md-4 pl-md-0 pl-3 text">
-                        <p class="con"><span>Call Us</span> <span>+91-9790144066</span></p>
-                        <p class="con">130, Kamaraj Salai, Puducherry 605013</p>
+
+                <!-- Contact Info (Left Column) -->
+                <div class="col-md-4 order-1 order-md-1 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-end text-md-right">
+                    <div class="me-md-3 mb-2 mb-md-0">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-phone-alt me-2 text-primary"></i>
+                            <span class="fw-semibold">+91-9790144066</span>
+                        </div>
+                        <div class="d-flex align-items-center mt-1">
+                            <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+                            <small>130, Kamaraj Salai, Puducherry 605013</small>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 order-md-3 d-flex topper mb-md-0 align-items-center">
-                    <div class="icon d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                    <div class="text pl-3 pl-md-3">
-                        <p class="hr"><span>Opening Hours</span></p>
-                        <p class="time"><span>Morning:</span> <span>9:30am - 1:30pm </span></p>
-                        <p class="time"><span>Evening:</span> <span>4:30am - 9:30pm </span></p>
+
+                <!-- Clinic Hours (Right Column) -->
+                <div class="col-md-4 order-3 d-flex flex-column align-items-center align-items-md-start text-md-left">
+                    <div class="d-flex align-items-center">
+                        <i class="far fa-clock me-2 text-success"></i>
+                        <span class="fw-semibold">Opening Hours</span>
                     </div>
+                    <small class="text-muted">Morning: 9:30am - 1:30pm</small>
+                    <small class="text-muted">Evening: 4:30pm - 9:30pm</small>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="scrolling-wrapper">
         <div class="scrolling-content">
             📢 Book your appointment today! | Get a free consultation for new patients! | Call us at +91-9790144066
@@ -243,9 +257,9 @@
             alertDiv.style.zIndex = '1050';
             alertDiv.role = 'alert';
             alertDiv.innerHTML = `
-                                                            <strong>${type.charAt(0).toUpperCase() + type.slice(1)}!</strong> ${message}
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        `;
+                                                                <strong>${type.charAt(0).toUpperCase() + type.slice(1)}!</strong> ${message}
+                                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                            `;
             document.body.appendChild(alertDiv);
 
             // Auto-dismiss after 4 seconds
@@ -273,7 +287,7 @@
     @if (TempData["Error"] != null)
     {
         <script>
-            showAlert("@TempData["Error"]","error");
+            showAlert("@TempData["Error"]","warning");
         </script>
     }
     <!-- loader -->
@@ -451,9 +465,9 @@
             alertDiv.style.textAlign = 'center';
 
             alertDiv.innerHTML = `
-                        <strong>${type.charAt(0).toUpperCase() + type.slice(1)}:</strong> ${message}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        `;
+                            <strong>${type.charAt(0).toUpperCase() + type.slice(1)}:</strong> ${message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            `;
 
             document.body.appendChild(alertDiv);
 
