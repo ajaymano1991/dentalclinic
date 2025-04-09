@@ -17,7 +17,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         public ActionResult Index()
         {
             List<Dentist> dentistList1 = db.Dentists.ToList();
-            List<Appointment> todaysAppointments = db.Appointments.ToList() 
+            List<Appointment> todaysAppointments = db.Appointments.ToList()
                                                    .Where(x => x.PreferredDateTime.Date == DateTime.Now.Date)
                                                    .ToList();
             var dentalNews = db.DentalNews.ToList()
@@ -25,7 +25,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                            .ToList();
 
             List<FeedBack> dentalFeedBackList = db.FeedBacks.ToList();
-                          
+
 
             List<Dentist> dentistList = new List<Dentist>();
             foreach (var dentist in dentistList1)
@@ -107,21 +107,21 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-               
-                    var v = db.PatientRegisters.Where(a => a.Username.Equals(patient.username) && a.Password.Equals(patient.password)).FirstOrDefault();
-                    if (v != null)
-                    {
-                        Session["LoggedPatientID"] = v.Id.ToString();
-                        Session["LoggedPatientUsername"] = v.Username.ToString();
-                        Session["LoggedPatientFullName"] = v.PatientName.ToString();
-                        return RedirectToAction("PatientPanel");
-                    }
-                    else
-                    {
-                        patient.LoginErrorMessage = "Wrong Username or Password";
-                        return View("PatientLogin");
-                    }
-                
+
+                var v = db.PatientRegisters.Where(a => a.Username.Equals(patient.username) && a.Password.Equals(patient.password)).FirstOrDefault();
+                if (v != null)
+                {
+                    Session["LoggedPatientID"] = v.Id.ToString();
+                    Session["LoggedPatientUsername"] = v.Username.ToString();
+                    Session["LoggedPatientFullName"] = v.PatientName.ToString();
+                    return RedirectToAction("PatientPanel");
+                }
+                else
+                {
+                    patient.LoginErrorMessage = "Wrong Username or Password";
+                    return View("PatientLogin");
+                }
+
             }
             return RedirectToAction("PatientLogin");
         }
@@ -248,7 +248,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             {
                 //if (appointment.PatientId == n)
                 //{
-                    appointmentList.Add(appointment);
+                appointmentList.Add(appointment);
                 //}
 
             }
@@ -299,17 +299,34 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
         [HttpPost]
         public ActionResult TakeAppointment(DentalClinicReservationAndManagementSystem.Models.Appointment appointment)
         {
-            ViewBag.Message2 = "";
             if (ModelState.IsValid)
             {
-                var appointments = db.Appointments.AsEnumerable() 
+                TimeSpan morningStart = new TimeSpan(9, 30, 0);   // 9:30 AM
+                TimeSpan morningEnd = new TimeSpan(13, 30, 0);    // 1:30 PM
+                TimeSpan eveningStart = new TimeSpan(16, 30, 0);  // 4:30 PM
+                TimeSpan eveningEnd = new TimeSpan(21, 30, 0);    // 9:30 PM
+
+                // Extract the time component of the preferred appointment time
+                TimeSpan appointmentTime = appointment.PreferredDateTime.TimeOfDay;
+
+                // Check if the appointment time is within the clinic's operating hours
+                bool isInMorningSlot = appointmentTime >= morningStart && appointmentTime <= morningEnd;
+                bool isInEveningSlot = appointmentTime >= eveningStart && appointmentTime <= eveningEnd;
+
+                if (!isInMorningSlot && !isInEveningSlot)
+                {
+                    TempData["Warning"] = "⏰ The selected time is outside of our operating hours. Please choose a time between 9:30 AM - 1:30 PM or 4:30 PM - 9:30 PM.";
+                    return RedirectToAction("Index");
+                }
+
+                var appointments = db.Appointments.AsEnumerable()
                                     .Where(a => a.PreferredDateTime == appointment.PreferredDateTime)
                                     .ToList();
 
-                if (appointments.Count>0)
+                if (appointments.Count > 0)
                 {
-                    ViewBag.Message2 = "Time slot is not available";
-                    return View("Index", appointment);
+                    TempData["Warning"] = "⏰ The selected time slot is currently unavailable. Please choose a different one.";
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -318,14 +335,16 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                         PatientName = appointment.PatientName,
                         Email = appointment.Email,
                         PhoneNumber = appointment.PhoneNumber,
-                        PreferredDateTime =appointment.PreferredDateTime,
-                        ReasonForAppointment=appointment.ReasonForAppointment,
-                        CreatedAt=DateTime.Now
+                        PreferredDateTime = appointment.PreferredDateTime,
+                        ReasonForAppointment = appointment.ReasonForAppointment,
+                        CreatedAt = DateTime.Now
                     };
                     db.Appointments.Add(newAppointment);
                     try
                     {
                         db.SaveChanges();
+                        TempData["Success"] = "🎉 Your appointment has been successfully booked! We look forward to seeing you soon.";
+
                     }
                     catch (DbEntityValidationException ex)
                     {
@@ -341,7 +360,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View();
+            return RedirectToAction("Index");
         }
         public ActionResult SeeAppointments()
         {
@@ -356,8 +375,8 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
             {
                 //if (appointment.DatientId == ap.DatientId)
                 //{
-                    fList.Add(ap);
-               // }
+                fList.Add(ap);
+                // }
             }
             ViewBag.fList = fList;
             return View();
@@ -372,7 +391,7 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
 
             if (subscribied != null)
             {
-                ViewBag.Message2 = "Already subscribied";
+                TempData["Warning"] = "You're already subscribed! Thank you for staying connected with us.";
                 return View("Index");
             }
             else
@@ -380,31 +399,31 @@ namespace DentalClinicReservationAndManagementSystem.Controllers
                 var newsubscription = new subscription()
                 {
                     Email = email,
-                    PhoneNumber=phoneNumber
+                    PhoneNumber = phoneNumber
                 };
 
                 db.subscriptions.Add(newsubscription);
                 db.SaveChanges();
+                TempData["Success"] = "🎉 Thank you for subscribing! We’re excited to have you with us.";
                 return RedirectToAction("Index");
             }
         }
         [HttpPost]
         public ActionResult SubmitFeedback(string PatientName, string FeedbackText, int Rating)
         {
-            
-                var newFeedback = new FeedBack()
-                {
-                    PatientName = PatientName,
-                    FeedbackText = FeedbackText,
-                    Rating = Rating,
-                    CreatedAt = DateTime.Now
-                };
 
-                db.FeedBacks.Add(newFeedback);
-                db.SaveChanges();
+            var newFeedback = new FeedBack()
+            {
+                PatientName = PatientName,
+                FeedbackText = FeedbackText,
+                Rating = Rating,
+                CreatedAt = DateTime.Now
+            };
 
-                ViewBag.Message2 = "Thank you for your feedback!";
-              return RedirectToAction("Index");
+            db.FeedBacks.Add(newFeedback);
+            db.SaveChanges();
+            TempData["Success"] = "Thank you for your feedback!";
+            return RedirectToAction("Index");
 
         }
 
